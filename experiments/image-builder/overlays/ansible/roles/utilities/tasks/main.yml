@@ -14,14 +14,14 @@
 
 - name: Download crictl
   win_get_url:
-    url: "https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.22.0/crictl-v1.22.0-windows-amd64.tar.gz"
-    dest: '{{ programfiles.stdout | trim }}\containerd\crictl-v1.22.0-windows-amd64.tar.gz'
+    url: "https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.26.0/crictl-v1.26.0-windows-amd64.tar.gz"
+    dest: '{{ programfiles.stdout | trim }}\containerd\crictl-v1.26.0-windows-amd64.tar.gz'
   retries: 5
   delay: 3
 
 - name: Decompress crictl binary
   win_shell: |
-   tar xvf "{{ programfiles.stdout | trim }}\containerd\crictl-v1.22.0-windows-amd64.tar.gz"
+   tar xvf "{{ programfiles.stdout | trim }}\containerd\crictl-v1.26.0-windows-amd64.tar.gz"
 
 
 # CHOCO PACKAGES

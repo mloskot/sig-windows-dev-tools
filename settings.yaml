@@ -30,7 +30,7 @@ kubernetes_build_from_source: false
 kubernetes_version: "1.26"
 
 ## Container Runtime (containerd only supported)
-containerd_version: "1.6.15"
+containerd_version: "1.6.20"
 
 ## Calico
 calico_version: "3.25.0"

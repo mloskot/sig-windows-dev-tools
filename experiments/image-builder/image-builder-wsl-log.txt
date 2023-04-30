@@ -1,0 +1,1735 @@
+Enabling Vagrant support for WSL, see https://developer.hashicorp.com/vagrant/docs/other/wsl
+SWDT_SETTINGS_FILE: /mnt/d/_kubernetes/sig-windows-dev-tools/settings.yaml
+IMAGE_BUILDER_FOLDER: image-builder
+IMAGE_BUILDER_BRANCH: master
+IMAGE_BUILDER_REPO: https://github.com/kubernetes-sigs/image-builder.git
+Loading user-specific environment variables from /mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/.env
+Starting galaxy collection install process
+Nothing to do. All requested collections are already installed. If you want to reinstall them, consider using `--force`.
+/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi /mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder
+Already on 'master'
+D	images/capi/packer/vbox/packer-windows.json
+M	images/capi/packer/vbox/windows/enable-winrm.ps1
+Your branch is up to date with 'origin/master'.
+Saving build configuration: /tmp/tmp.JDFTV5TfpU
+{
+  "os_iso_url": "/mnt/f/_/software/microsoft/WindowsServer2019/17763.3650.221105-1748.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso",
+  "runtime": "containerd",
+  "ansible_extra_vars": "custom_role=true load_additional_components=true additional_registry_images=true additional_registry_images_list=docker.io/stefanscherer/whoami:windows-amd64-2.0.2",
+  "custom_role_names": "utilities",
+  "windows_updates_kbs": "KB5009557",
+  "calico_version": "3.25.0",
+  "containerd_version": "1.6.20",
+  "kubernetes_version": "1.26",
+  "kubernetes_series": "v1.26"
+}
+rm -fr output/windows-2019-kube*
+hack/ensure-ansible.sh
+[WARNING]: Ansible is being run in a world writable directory
+(/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-
+builder/images/capi), ignoring it as an ansible.cfg source. For more
+information see
+https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-
+world-writable-dir
+Starting galaxy collection install process
+Nothing to do. All requested collections are already installed. If you want to reinstall them, consider using `--force`.
+hack/ensure-ansible-windows.sh
+hack/ensure-packer.sh
+hack/ensure-goss.sh
+Right version of binary present
+packer build -var-file="/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/packer/config/kubernetes.json"  -var-file="/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/packer/config/windows/kubernetes.json"  -var-file="/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/packer/config/containerd.json"  -var-file="/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/packer/config/windows/containerd.json"  -var-file="/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/packer/config/windows/docker.json"  -var-file="/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/packer/config/windows/ansible-args-windows.json"  -var-file="/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/packer/config/common.json"  -var-file="/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/packer/config/windows/common.json"  -var-file="/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/packer/config/windows/cloudbase-init.json"  -var-file="/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/packer/config/goss-args.json"  -var-file="/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/packer/config/additional_components.json"  -color=true -on-error=ask -var-file="packer/vbox/packer-common.json" -var-file="/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/packer/vbox/windows-2019.json" -only=virtualbox-iso -var-file="/tmp/tmp.JDFTV5TfpU"  packer/vbox/packer-windows.json
+2023/05/03 19:27:57 [INFO] Packer version: 1.8.6 [go1.18.9 linux amd64]
+2023/05/03 19:27:57 Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:57 [TRACE] discovering plugins in /usr/bin
+2023/05/03 19:27:57 Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:57 [TRACE] discovering plugins in /home/mloskot/.packer.d/plugins
+2023/05/03 19:27:57 [DEBUG] Discovered plugin: goss = /home/mloskot/.packer.d/plugins/packer-provisioner-goss
+2023/05/03 19:27:57 using external provisioners [goss]
+2023/05/03 19:27:57 [TRACE] discovering plugins in .
+2023/05/03 19:27:58 [INFO] PACKER_CONFIG env var not set; checking the default config file path
+2023/05/03 19:27:58 [INFO] PACKER_CONFIG env var set; attempting to open config file: /home/mloskot/.packerconfig
+2023/05/03 19:27:58 [WARN] Config file doesn't exist: /home/mloskot/.packerconfig
+2023/05/03 19:27:58 Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:58 [INFO] Setting cache directory: /home/mloskot/.cache/packer
+2023/05/03 19:27:58 Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:58 [TRACE] Starting internal plugin packer-builder-virtualbox-iso
+2023/05/03 19:27:58 Starting plugin: /usr/bin/packer []string{"/usr/bin/packer", "plugin", "packer-builder-virtualbox-iso"}
+2023/05/03 19:27:58 Waiting for RPC address for: /usr/bin/packer
+2023/05/03 19:27:58 packer-builder-virtualbox-iso plugin: [INFO] Packer version: 1.8.6 [go1.18.9 linux amd64]
+2023/05/03 19:27:58 packer-builder-virtualbox-iso plugin: Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:58 packer-builder-virtualbox-iso plugin: [INFO] PACKER_CONFIG env var not set; checking the default config file path
+2023/05/03 19:27:58 packer-builder-virtualbox-iso plugin: [INFO] PACKER_CONFIG env var set; attempting to open config file: /home/mloskot/.packerconfig
+2023/05/03 19:27:58 packer-builder-virtualbox-iso plugin: [WARN] Config file doesn't exist: /home/mloskot/.packerconfig
+2023/05/03 19:27:58 packer-builder-virtualbox-iso plugin: Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:58 packer-builder-virtualbox-iso plugin: [INFO] Setting cache directory: /home/mloskot/.cache/packer
+2023/05/03 19:27:58 packer-builder-virtualbox-iso plugin: args: []string{"packer-builder-virtualbox-iso"}
+2023/05/03 19:27:58 packer-builder-virtualbox-iso plugin: Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:58 packer-builder-virtualbox-iso plugin: Plugin address: unix /tmp/packer-plugin2683660774
+2023/05/03 19:27:58 packer-builder-virtualbox-iso plugin: Waiting for connection...
+2023/05/03 19:27:58 Received unix RPC address for /usr/bin/packer: addr is /tmp/packer-plugin2683660774
+2023/05/03 19:27:58 packer-builder-virtualbox-iso plugin: Serving a plugin connection...
+2023/05/03 19:27:58 [TRACE] Starting internal plugin packer-provisioner-ansible
+2023/05/03 19:27:58 Starting plugin: /usr/bin/packer []string{"/usr/bin/packer", "plugin", "packer-provisioner-ansible"}
+2023/05/03 19:27:58 Waiting for RPC address for: /usr/bin/packer
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: [INFO] Packer version: 1.8.6 [go1.18.9 linux amd64]
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: [INFO] PACKER_CONFIG env var not set; checking the default config file path
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: [INFO] PACKER_CONFIG env var set; attempting to open config file: /home/mloskot/.packerconfig
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: [WARN] Config file doesn't exist: /home/mloskot/.packerconfig
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: [INFO] Setting cache directory: /home/mloskot/.cache/packer
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: args: []string{"packer-provisioner-ansible"}
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: Plugin address: unix /tmp/packer-plugin838702353
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: Waiting for connection...
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:59 Received unix RPC address for /usr/bin/packer: addr is /tmp/packer-plugin838702353
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: Serving a plugin connection...
+2023/05/03 19:27:59 [TRACE] Starting internal plugin packer-provisioner-windows-restart
+2023/05/03 19:27:59 Starting plugin: /usr/bin/packer []string{"/usr/bin/packer", "plugin", "packer-provisioner-windows-restart"}
+2023/05/03 19:27:59 Waiting for RPC address for: /usr/bin/packer
+2023/05/03 19:27:59 packer-provisioner-windows-restart plugin: [INFO] Packer version: 1.8.6 [go1.18.9 linux amd64]
+2023/05/03 19:27:59 packer-provisioner-windows-restart plugin: Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:59 packer-provisioner-windows-restart plugin: [INFO] PACKER_CONFIG env var not set; checking the default config file path
+2023/05/03 19:27:59 packer-provisioner-windows-restart plugin: [INFO] PACKER_CONFIG env var set; attempting to open config file: /home/mloskot/.packerconfig
+2023/05/03 19:27:59 packer-provisioner-windows-restart plugin: [WARN] Config file doesn't exist: /home/mloskot/.packerconfig
+2023/05/03 19:27:59 packer-provisioner-windows-restart plugin: Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:59 packer-provisioner-windows-restart plugin: [INFO] Setting cache directory: /home/mloskot/.cache/packer
+2023/05/03 19:27:59 packer-provisioner-windows-restart plugin: Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:59 packer-provisioner-windows-restart plugin: args: []string{"packer-provisioner-windows-restart"}
+2023/05/03 19:27:59 packer-provisioner-windows-restart plugin: Plugin address: unix /tmp/packer-plugin1757742483
+2023/05/03 19:27:59 packer-provisioner-windows-restart plugin: Waiting for connection...
+2023/05/03 19:27:59 Received unix RPC address for /usr/bin/packer: addr is /tmp/packer-plugin1757742483
+2023/05/03 19:27:59 packer-provisioner-windows-restart plugin: Serving a plugin connection...
+2023/05/03 19:27:59 [TRACE] Starting external plugin /home/mloskot/.packer.d/plugins/packer-provisioner-goss 
+2023/05/03 19:27:59 Starting plugin: /home/mloskot/.packer.d/plugins/packer-provisioner-goss []string{"/home/mloskot/.packer.d/plugins/packer-provisioner-goss"}
+2023/05/03 19:27:59 Waiting for RPC address for: /home/mloskot/.packer.d/plugins/packer-provisioner-goss
+2023/05/03 19:27:59 packer-provisioner-goss plugin: 2023/05/03 19:27:59 Plugin address: unix /tmp/packer-plugin3755431941
+2023/05/03 19:27:59 packer-provisioner-goss plugin: 2023/05/03 19:27:59 Waiting for connection...
+2023/05/03 19:27:59 Received unix RPC address for /home/mloskot/.packer.d/plugins/packer-provisioner-goss: addr is /tmp/packer-plugin3755431941
+2023/05/03 19:27:59 packer-provisioner-goss plugin: 2023/05/03 19:27:59 Serving a plugin connection...
+2023/05/03 19:27:59 [TRACE] Starting internal plugin packer-post-processor-vagrant
+2023/05/03 19:27:59 Starting plugin: /usr/bin/packer []string{"/usr/bin/packer", "plugin", "packer-post-processor-vagrant"}
+2023/05/03 19:27:59 Waiting for RPC address for: /usr/bin/packer
+2023/05/03 19:27:59 packer-post-processor-vagrant plugin: [INFO] Packer version: 1.8.6 [go1.18.9 linux amd64]
+2023/05/03 19:27:59 packer-post-processor-vagrant plugin: Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:59 packer-post-processor-vagrant plugin: [INFO] PACKER_CONFIG env var not set; checking the default config file path
+2023/05/03 19:27:59 packer-post-processor-vagrant plugin: [INFO] PACKER_CONFIG env var set; attempting to open config file: /home/mloskot/.packerconfig
+2023/05/03 19:27:59 packer-post-processor-vagrant plugin: [WARN] Config file doesn't exist: /home/mloskot/.packerconfig
+2023/05/03 19:27:59 packer-post-processor-vagrant plugin: Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:59 packer-post-processor-vagrant plugin: [INFO] Setting cache directory: /home/mloskot/.cache/packer
+2023/05/03 19:27:59 packer-post-processor-vagrant plugin: args: []string{"packer-post-processor-vagrant"}
+2023/05/03 19:27:59 packer-post-processor-vagrant plugin: Old default config directory found: /home/mloskot/.packer.d
+2023/05/03 19:27:59 Received unix RPC address for /usr/bin/packer: addr is /tmp/packer-plugin314423244
+2023/05/03 19:27:59 packer-post-processor-vagrant plugin: Plugin address: unix /tmp/packer-plugin314423244
+2023/05/03 19:27:59 packer-post-processor-vagrant plugin: Waiting for connection...
+2023/05/03 19:27:59 packer-post-processor-vagrant plugin: Serving a plugin connection...
+2023/05/03 19:27:59 Preparing build: virtualbox-iso
+2023/05/03 19:27:59 packer-provisioner-ansible plugin: ansible-playbook version: 2.14.5
+
+A checksum of 'none' was specified. Since ISO files are so big,
+a checksum is highly recommended.
+
+2023/05/03 19:28:00 Build debug mode: false
+2023/05/03 19:28:00 Force build: false
+2023/05/03 19:28:00 On error: ask
+2023/05/03 19:28:00 Waiting on builds to complete...
+2023/05/03 19:28:00 Starting build run: virtualbox-iso
+2023/05/03 19:28:00 Running builder: virtualbox-iso
+2023/05/03 19:28:00 [INFO] (telemetry) Starting builder virtualbox-iso
+Warning: Warning when preparing build: "virtualbox-iso"
+
+A checksum of 'none' was specified. Since ISO files are so big,
+a checksum is highly recommended.
+
+
+[1;32mvirtualbox-iso: output will be in this color.[0m
+
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: VBoxManage path: /mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/VBoxManage
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: Not downloading guest additions since it is disabled.
+[1;32m==> virtualbox-iso: Retrieving ISO[0m
+[1;32m==> virtualbox-iso: Trying /mnt/f/_/software/microsoft/WindowsServer2019/17763.3650.221105-1748.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso[0m
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: Acquiring lock for: /mnt/f/_/software/microsoft/WindowsServer2019/17763.3650.221105-1748.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso (/home/mloskot/.cache/packer/f209023c60d849cf6d86014dd9964208cf9e5e1d.iso.lock)
+[1;32m==> virtualbox-iso: Trying /mnt/f/_/software/microsoft/WindowsServer2019/17763.3650.221105-1748.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso[0m
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: Leaving retrieve loop for ISO
+[1;32m==> virtualbox-iso: /mnt/f/_/software/microsoft/WindowsServer2019/17763.3650.221105-1748.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso => /mnt/f/_/software/microsoft/WindowsServer2019/17763.3650.221105-1748.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso[0m
+[1;32m==> virtualbox-iso: Creating floppy disk...[0m
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: Floppy path: /tmp/packer3313478041
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: Initializing block device backed by temporary file
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: Formatting the block device with a FAT filesystem...
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: Initializing FAT filesystem on block device
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: Reading the root directory from the filesystem
+[0;32m    virtualbox-iso: Copying files flatly from floppy_files[0m
+[0;32m    virtualbox-iso: Copying file: ./packer/vbox/windows/windows-2019/autounattend.xml[0m
+[0;32m    virtualbox-iso: Copying file: ./packer/vbox/windows/enable-winrm.ps1[0m
+[0;32m    virtualbox-iso: Copying file: ./packer/vbox/windows/sysprep.ps1[0m
+[0;32m    virtualbox-iso: Done copying files from floppy_files[0m
+[0;32m    virtualbox-iso: Collecting paths from floppy_dirs[0m
+[0;32m    virtualbox-iso: Resulting paths from floppy_dirs : [][0m
+[0;32m    virtualbox-iso: Done copying paths from floppy_dirs[0m
+[0;32m    virtualbox-iso: Copying files from floppy_content[0m
+[0;32m    virtualbox-iso: Done copying files from floppy_content[0m
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: No CD files specified. CD disk will not be made.
+[1;32m==> virtualbox-iso: Creating ephemeral key pair for SSH communicator...[0m
+[1;32m==> virtualbox-iso: Created ephemeral SSH key pair for communicator[0m
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: Suppressing annoying messages in VirtualBox
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"setextradata", "global", "GUI/RegistrationData", "triesLeft=0"}
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "setextradata" "global" "GUI/RegistrationData" "triesLeft=0"
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"setextradata", "global", "GUI/SuppressMessages", "confirmInputCapture,remindAboutAutoCapture,remindAboutMouseIntegrationOff,remindAboutMouseIntegrationOn,remindAboutWrongColorDepth"}
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "setextradata" "global" "GUI/SuppressMessages" "confirmInputCapture,remindAboutAutoCapture,remindAboutMouseIntegrationOff,remindAboutMouseIntegrationOn,remindAboutWrongColorDepth"
+2023/05/03 19:28:00 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"setextradata", "global", "GUI/UpdateCheckCount", "60"}
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "setextradata" "global" "GUI/UpdateCheckCount" "60"
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"setextradata", "global", "GUI/UpdateDate", "1 d, 2024-01-01, stable"}
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "setextradata" "global" "GUI/UpdateDate" "1 d, 2024-01-01, stable"
+[1;32m==> virtualbox-iso: Creating virtual machine...[0m
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"createvm", "--name", "windows-2019-kube-v1.24.11", "--ostype", "windows9srv-64", "--register"}
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: stdout: Virtual machine 'windows-2019-kube-v1.24.11' is created and registered.
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: UUID: 88217656-e524-4359-9786-95f91f900955
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: Settings file: 'D:\_\_virtualbox\VMs\windows-2019-kube-v1.24.11\windows-2019-kube-v1.24.11.vbox'
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "createvm" "--name" "windows-2019-kube-v1.24.11" "--ostype" "windows9srv-64" "--register"
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--boot1", "disk", "--boot2", "dvd", "--boot3", "none", "--boot4", "none"}
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--boot1" "disk" "--boot2" "dvd" "--boot3" "none" "--boot4" "none"
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--cpus", "4"}
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--cpus" "4"
+2023/05/03 19:28:01 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--memory", "8192"}
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--memory" "8192"
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--usb", "off"}
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--usb" "off"
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--audio", "none", "--audiocontroller", "ac97"}
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--audio" "none" "--audiocontroller" "ac97"
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: Warning: --audio is deprecated and will be removed soon. Use --audio-driver instead!
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--chipset", "piix3"}
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--chipset" "piix3"
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--firmware", "bios"}
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--firmware" "bios"
+2023/05/03 19:28:02 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--nictype1", "82540EM", "--nictype2", "82540EM", "--nictype3", "82540EM", "--nictype4", "82540EM", "--nictype5", "82540EM", "--nictype6", "82540EM", "--nictype7", "82540EM", "--nictype8", "82540EM"}
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--nictype1" "82540EM" "--nictype2" "82540EM" "--nictype3" "82540EM" "--nictype4" "82540EM" "--nictype5" "82540EM" "--nictype6" "82540EM" "--nictype7" "82540EM" "--nictype8" "82540EM"
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--graphicscontroller", "vboxvga", "--vram", "4"}
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--graphicscontroller" "vboxvga" "--vram" "4"
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--rtcuseutc", "off"}
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--rtcuseutc" "off"
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--accelerate3d", "off"}
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--accelerate3d" "off"
+[1;32m==> virtualbox-iso: Creating hard drive output/windows-2019-kube-v1.24.11/windows-2019-kube-v1.24.11.vdi with size 81920 MiB...[0m
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"createhd", "--filename", "output/windows-2019-kube-v1.24.11/windows-2019-kube-v1.24.11.vdi", "--size", "81920", "--format", "VDI", "--variant", "Standard"}
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: stdout: Medium created. UUID: 47995df9-dd80-41b1-9528-a8950fd7f27d
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "createhd" "--filename" "output/windows-2019-kube-v1.24.11/windows-2019-kube-v1.24.11.vdi" "--size" "81920" "--format" "VDI" "--variant" "Standard"
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+2023/05/03 19:28:03 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"storagectl", "windows-2019-kube-v1.24.11", "--name", "IDE Controller", "--add", "ide"}
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "storagectl" "windows-2019-kube-v1.24.11" "--name" "IDE Controller" "--add" "ide"
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"storageattach", "windows-2019-kube-v1.24.11", "--storagectl", "IDE Controller", "--port", "0", "--device", "0", "--type", "hdd", "--medium", "output/windows-2019-kube-v1.24.11/windows-2019-kube-v1.24.11.vdi", "--nonrotational", "off", "--discard", "off"}
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "storageattach" "windows-2019-kube-v1.24.11" "--storagectl" "IDE Controller" "--port" "0" "--device" "0" "--type" "hdd" "--medium" "D:\_kubernetes\sig-windows-dev-tools\experiments\image-builder\image-builder\images\capi\output\windows-2019-kube-v1.24.11\windows-2019-kube-v1.24.11.vdi" "--nonrotational" "off" "--discard" "off"
+[1;32m==> virtualbox-iso: Mounting ISOs...[0m
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: Not attaching guest additions since we're uploading.
+[0;32m    virtualbox-iso: Mounting boot ISO...[0m
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"storageattach", "windows-2019-kube-v1.24.11", "--storagectl", "IDE Controller", "--port", "0", "--device", "1", "--type", "dvddrive", "--medium", "/mnt/f/_/software/microsoft/WindowsServer2019/17763.3650.221105-1748.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso"}
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "storageattach" "windows-2019-kube-v1.24.11" "--storagectl" "IDE Controller" "--port" "0" "--device" "1" "--type" "dvddrive" "--medium" "F:\_\software\microsoft\WindowsServer2019\17763.3650.221105-1748.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso"
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: Looking for available port between 5900 and 6000 on 127.0.0.1
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: Found available port: 5942 on IP: 127.0.0.1
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--vrdeaddress", "127.0.0.1", "--vrdeauthtype", "null", "--vrde", "on", "--vrdeport", "5942"}
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--vrdeaddress" "127.0.0.1" "--vrdeauthtype" "null" "--vrde" "on" "--vrdeport" "5942"
+2023/05/03 19:28:04 packer-builder-virtualbox-iso plugin: Copying floppy to temp location: /tmp/virtualbox2059084682/floppy.vfd
+[1;32m==> virtualbox-iso: Deleting any current floppy disk...[0m
+[1;32m==> virtualbox-iso: Attaching floppy disk...[0m
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"storagectl", "windows-2019-kube-v1.24.11", "--name", "Floppy Controller", "--add", "floppy"}
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "storagectl" "windows-2019-kube-v1.24.11" "--name" "Floppy Controller" "--add" "floppy"
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"storageattach", "windows-2019-kube-v1.24.11", "--storagectl", "Floppy Controller", "--port", "0", "--device", "0", "--type", "fdd", "--medium", "/tmp/virtualbox2059084682/floppy.vfd"}
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "storageattach" "windows-2019-kube-v1.24.11" "--storagectl" "Floppy Controller" "--port" "0" "--device" "0" "--type" "fdd" "--medium" "\\wsl.localhost\Ubuntu\tmp\virtualbox2059084682\floppy.vfd"
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: Looking for available communicator (SSH, WinRM, etc) port between 4442 and 4444
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: Found available port: 4443 on IP: 127.0.0.1
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--nic1", "nat"}
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--nic1" "nat"
+[1;32m==> virtualbox-iso: Creating forwarded port mapping for communicator (SSH, WinRM, etc) (host port 4443)[0m
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--natpf1", "packercomm,tcp,127.0.0.1,4443,,5985"}
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--natpf1" "packercomm,tcp,127.0.0.1,4443,,5985"
+[1;32m==> virtualbox-iso: Executing custom VBoxManage commands...[0m
+[0;32m    virtualbox-iso: Executing: modifyvm windows-2019-kube-v1.24.11 --nic2 hostonly[0m
+2023/05/03 19:28:05 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--nic2", "hostonly"}
+2023/05/03 19:28:06 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:06 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--nic2" "hostonly"
+[0;32m    virtualbox-iso: Executing: modifyvm windows-2019-kube-v1.24.11 --natpf1 swdtwinrm4442,tcp,10.0.1.111,4442,,5985[0m
+2023/05/03 19:28:06 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--natpf1", "swdtwinrm4442,tcp,10.0.1.111,4442,,5985"}
+2023/05/03 19:28:06 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:06 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--natpf1" "swdtwinrm4442,tcp,10.0.1.111,4442,,5985"
+[0;32m    virtualbox-iso: Executing: modifyvm windows-2019-kube-v1.24.11 --natpf1 swdtwinrm4443,tcp,10.0.1.111,4443,,5985[0m
+2023/05/03 19:28:06 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--natpf1", "swdtwinrm4443,tcp,10.0.1.111,4443,,5985"}
+2023/05/03 19:28:06 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:06 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--natpf1" "swdtwinrm4443,tcp,10.0.1.111,4443,,5985"
+[0;32m    virtualbox-iso: Executing: modifyvm windows-2019-kube-v1.24.11 --natpf1 swdtwinrm4444,tcp,10.0.1.111,4444,,5985[0m
+2023/05/03 19:28:06 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--natpf1", "swdtwinrm4444,tcp,10.0.1.111,4444,,5985"}
+2023/05/03 19:28:06 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:06 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--natpf1" "swdtwinrm4444,tcp,10.0.1.111,4444,,5985"
+[0;32m    virtualbox-iso: Executing: modifyvm windows-2019-kube-v1.24.11 --hostonlyadapter2 VirtualBox Host-Only Ethernet Adapter[0m
+2023/05/03 19:28:06 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--hostonlyadapter2", "VirtualBox Host-Only Ethernet Adapter"}
+2023/05/03 19:28:07 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 19:28:07 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--hostonlyadapter2" "VirtualBox Host-Only Ethernet Adapter"
+[1;32m==> virtualbox-iso: Starting the virtual machine...[0m
+2023/05/03 19:28:07 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"startvm", "windows-2019-kube-v1.24.11", "--type", "gui"}
+2023/05/03 19:28:19 packer-builder-virtualbox-iso plugin: stdout: Waiting for VM "windows-2019-kube-v1.24.11" to power on...
+2023/05/03 19:28:19 packer-builder-virtualbox-iso plugin: VM "windows-2019-kube-v1.24.11" has been successfully started.
+2023/05/03 19:28:19 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "startvm" "windows-2019-kube-v1.24.11" "--type" "gui"
+[1;32m==> virtualbox-iso: Waiting 10s for boot...[0m
+[1;32m==> virtualbox-iso: Typing the boot command...[0m
+[1;32m==> virtualbox-iso: Using WinRM communicator to connect: 10.0.1.111[0m
+2023/05/03 19:28:29 packer-builder-virtualbox-iso plugin: Waiting for WinRM, up to timeout: 4h0m0s
+[1;32m==> virtualbox-iso: Waiting for WinRM to become available...[0m
+2023/05/03 19:28:29 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:28:29 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:29:44 packer-builder-virtualbox-iso plugin: [ERROR] connection error: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:48782->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:29:44 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:48782->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:29:49 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:29:49 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:31:04 packer-builder-virtualbox-iso plugin: [ERROR] connection error: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:56414->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:31:04 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:56414->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:31:09 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:31:09 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:32:24 packer-builder-virtualbox-iso plugin: [ERROR] connection error: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:35792->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:32:24 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:35792->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:32:29 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:32:29 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:33:44 packer-builder-virtualbox-iso plugin: [ERROR] connection error: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:51888->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:33:44 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:51888->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:33:49 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:33:49 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:35:04 packer-builder-virtualbox-iso plugin: [ERROR] connection error: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:54424->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:35:04 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:54424->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:35:09 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:35:09 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:36:24 packer-builder-virtualbox-iso plugin: [ERROR] connection error: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:50550->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:36:24 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:50550->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:36:29 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:36:29 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:37:44 packer-builder-virtualbox-iso plugin: [ERROR] connection error: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:42214->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:37:44 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:42214->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:37:49 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:37:49 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:39:05 packer-builder-virtualbox-iso plugin: [ERROR] connection error: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:41620->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:39:05 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:41620->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:39:10 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:39:10 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:40:25 packer-builder-virtualbox-iso plugin: [ERROR] connection error: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:52852->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:40:25 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:52852->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:40:30 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:40:30 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:41:45 packer-builder-virtualbox-iso plugin: [ERROR] connection error: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:40164->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:41:45 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:40164->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:41:50 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:41:50 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:41:57 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:41:57 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:42:02 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:42:02 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:42:02 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:42:02 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:42:07 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:42:07 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:42:07 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:42:07 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:42:12 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:42:12 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:42:57 packer-builder-virtualbox-iso plugin: [ERROR] connection error: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:41080->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:42:57 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:41080->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:43:02 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:43:02 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:43:02 packer-builder-virtualbox-iso plugin: [ERROR] connection error: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:39196->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:43:02 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:39196->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:43:07 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:43:07 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:43:07 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:43:07 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:43:12 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:43:12 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:43:12 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:43:12 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:43:17 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:43:17 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:43:17 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:43:17 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:43:22 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:43:22 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:43:22 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:43:22 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:43:27 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:43:27 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:43:27 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:43:27 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:43:32 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:43:32 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:43:32 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:43:32 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:43:37 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:43:37 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:43:37 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:43:37 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:43:42 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:43:42 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:43:42 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:43:42 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:43:47 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:43:47 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:43:47 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:43:47 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:43:52 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:43:52 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:43:53 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:43:53 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:43:58 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:43:58 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:43:58 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:43:58 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:44:03 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:44:03 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:44:03 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:44:03 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:44:08 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:44:08 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:44:09 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:44:09 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:44:14 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:44:14 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:44:14 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:44:14 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:44:19 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:44:19 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:44:19 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:44:19 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:44:24 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:44:24 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:44:24 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:44:24 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:44:29 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:44:29 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:44:29 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:44:29 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:44:34 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:44:34 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:44:34 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:44:34 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:44:39 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:44:39 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:44:39 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:44:39 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:44:44 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:44:44 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:44:44 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:44:44 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:44:49 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:44:49 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:44:50 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:44:50 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:44:55 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:44:55 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:44:55 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:44:55 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:45:00 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:45:00 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:45:00 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:45:00 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:45:05 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:45:05 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:45:05 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:45:05 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:45:10 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:45:10 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:45:10 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:45:10 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:45:15 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:45:15 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:45:15 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:45:15 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:45:20 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:45:20 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:45:20 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:45:20 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:45:25 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:45:25 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:45:25 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:45:25 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:45:30 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:45:30 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:45:30 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:45:30 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:45:35 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:45:35 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:45:35 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:45:35 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:45:40 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:45:40 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:45:40 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:45:40 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:45:45 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:45:45 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:45:45 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:45:45 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:45:50 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:45:50 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:45:50 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:45:50 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:45:55 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:45:55 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:45:55 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:45:55 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:46:00 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:46:00 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:46:00 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:46:00 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:46:05 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:46:05 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:46:05 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:46:05 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:46:10 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:46:10 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:46:10 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:46:10 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:46:15 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:46:15 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:46:15 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:46:15 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:46:20 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:46:20 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:46:20 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:46:20 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:46:25 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:46:25 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:46:25 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:46:25 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:46:30 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:46:30 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:46:30 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:46:30 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:46:35 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:46:35 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:46:35 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:46:35 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:46:40 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:46:40 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:46:40 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:46:40 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:46:45 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:46:45 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:46:45 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:46:45 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:46:50 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:46:50 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:46:50 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:46:50 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:46:55 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:46:55 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:46:55 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:46:55 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:47:00 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:47:00 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:47:00 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:47:00 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:47:05 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:47:05 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:47:05 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:47:05 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:47:10 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:47:10 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:47:10 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:47:10 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:47:15 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:47:15 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:47:15 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:47:15 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:47:20 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:47:20 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:47:20 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:47:20 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:47:25 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:47:25 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:47:25 packer-builder-virtualbox-iso plugin: [ERROR] connection error: http response error: 401 - invalid content type
+2023/05/03 19:47:25 packer-builder-virtualbox-iso plugin: [ERROR] WinRM connection err: http response error: 401 - invalid content type
+2023/05/03 19:47:30 packer-builder-virtualbox-iso plugin: [INFO] Attempting WinRM connection...
+2023/05/03 19:47:30 packer-builder-virtualbox-iso plugin: [DEBUG] connecting to remote shell using WinRM
+2023/05/03 19:47:39 packer-builder-virtualbox-iso plugin: Checking that WinRM is connected with: 'powershell.exe -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7AGkAZgAgACgAVABlAHMAdAAtAFAAYQB0AGgAIAB2AGEAcgBpAGEAYgBsAGUAOgBnAGwAbwBiAGEAbAA6AFAAcgBvAGcAcgBlAHMAcwBQAHIAZQBmAGUAcgBlAG4AYwBlACkAewAkAFAAcgBvAGcAcgBlAHMAcwBQAHIAZQBmAGUAcgBlAG4AYwBlAD0AJwBTAGkAbABlAG4AdABsAHkAQwBvAG4AdABpAG4AdQBlACcAfQA7ACAAZQBjAGgAbwAgACIAVwBpAG4AUgBNACAAYwBvAG4AbgBlAGMAdABlAGQALgAiAA=='
+2023/05/03 19:47:39 packer-builder-virtualbox-iso plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:48626->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 19:47:44 packer-builder-virtualbox-iso plugin: Checking that WinRM is connected with: 'powershell.exe -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7AGkAZgAgACgAVABlAHMAdAAtAFAAYQB0AGgAIAB2AGEAcgBpAGEAYgBsAGUAOgBnAGwAbwBiAGEAbAA6AFAAcgBvAGcAcgBlAHMAcwBQAHIAZQBmAGUAcgBlAG4AYwBlACkAewAkAFAAcgBvAGcAcgBlAHMAcwBQAHIAZQBmAGUAcgBlAG4AYwBlAD0AJwBTAGkAbABlAG4AdABsAHkAQwBvAG4AdABpAG4AdQBlACcAfQA7ACAAZQBjAGgAbwAgACIAVwBpAG4AUgBNACAAYwBvAG4AbgBlAGMAdABlAGQALgAiAA=='
+2023/05/03 19:47:44 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: powershell.exe -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7AGkAZgAgACgAVABlAHMAdAAtAFAAYQB0AGgAIAB2AGEAcgBpAGEAYgBsAGUAOgBnAGwAbwBiAGEAbAA6AFAAcgBvAGcAcgBlAHMAcwBQAHIAZQBmAGUAcgBlAG4AYwBlACkAewAkAFAAcgBvAGcAcgBlAHMAcwBQAHIAZQBmAGUAcgBlAG4AYwBlAD0AJwBTAGkAbABlAG4AdABsAHkAQwBvAG4AdABpAG4AdQBlACcAfQA7ACAAZQBjAGgAbwAgACIAVwBpAG4AUgBNACAAYwBvAG4AbgBlAGMAdABlAGQALgAiAA==
+2023/05/03 19:47:56 packer-builder-virtualbox-iso plugin: [INFO] command 'powershell.exe -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7AGkAZgAgACgAVABlAHMAdAAtAFAAYQB0AGgAIAB2AGEAcgBpAGEAYgBsAGUAOgBnAGwAbwBiAGEAbAA6AFAAcgBvAGcAcgBlAHMAcwBQAHIAZQBmAGUAcgBlAG4AYwBlACkAewAkAFAAcgBvAGcAcgBlAHMAcwBQAHIAZQBmAGUAcgBlAG4AYwBlAD0AJwBTAGkAbABlAG4AdABsAHkAQwBvAG4AdABpAG4AdQBlACcAfQA7ACAAZQBjAGgAbwAgACIAVwBpAG4AUgBNACAAYwBvAG4AbgBlAGMAdABlAGQALgAiAA==' exited with code: 0
+[0;32m    virtualbox-iso: WinRM connected.[0m
+2023/05/03 19:47:56 packer-builder-virtualbox-iso plugin: Connected to machine
+[1;32m==> virtualbox-iso: Connected to WinRM![0m
+2023/05/03 19:47:56 packer-builder-virtualbox-iso plugin: VBoxManage --version output: 7.0.8r156879
+2023/05/03 19:47:56 packer-builder-virtualbox-iso plugin: VirtualBox version: 7.0.8
+[1;32m==> virtualbox-iso: Uploading VirtualBox version info (7.0.8)[0m
+2023/05/03 19:47:56 packer-builder-virtualbox-iso plugin: Uploading file to '.vbox_version'
+2023/05/03 19:48:19 packer-builder-virtualbox-iso plugin: Not uploading guest additions since mode is not upload
+2023/05/03 19:48:19 packer-builder-virtualbox-iso plugin: Running the provision hook
+2023/05/03 19:48:19 [INFO] (telemetry) Starting provisioner ansible
+[1;32m==> virtualbox-iso: Provisioning with Ansible...[0m
+    virtualbox-iso: 	Using WinRM Password from Packer communicator...[0m
+[0;32m    virtualbox-iso: Not using Proxy adapter for Ansible run:
+    virtualbox-iso: 	Using WinRM Password from Packer communicator...[0m
+2023/05/03 19:48:19 packer-provisioner-ansible plugin: Creating inventory file for Ansible run...
+[1;32m==> virtualbox-iso: Executing Ansible: ansible-playbook -e packer_build_name="virtualbox-iso" -e packer_builder_type=virtualbox-iso -e packer_http_addr=10.0.2.2:0 -e ansible_winrm_scheme=http --extra-vars runtime=containerd docker_ee_version=19.03.12 containerd_url=https://github.com/containerd/containerd/releases/download/v1.6.20/containerd-1.6.20-windows-amd64.tar.gz containerd_sha256=7718a5f68a21106026ac16ce4bc7575d33db5a7d70f729545fb476160b215e10 pause_image=registry.k8s.io/pause:3.9 additional_debug_files="" containerd_additional_settings= custom_role_names="utilities" http_proxy= https_proxy= no_proxy= kubernetes_base_url=https://kubernetesreleases.blob.core.windows.net/kubernetes/v1.24.11/binaries/node/windows/amd64 kubernetes_semver=v1.24.11 kubernetes_install_path=c:\k cloudbase_init_url="https://github.com/cloudbase/cloudbase-init/releases/download/1.1.4/CloudbaseInitSetup_1_1_4_x64.msi" cloudbase_plugins="cloudbaseinit.plugins.common.ephemeraldisk.EphemeralDiskPlugin, cloudbaseinit.plugins.common.mtu.MTUPlugin, cloudbaseinit.plugins.common.sethostname.SetHostNamePlugin,  cloudbaseinit.plugins.common.sshpublickeys.SetUserSSHPublicKeysPlugin, cloudbaseinit.plugins.common.userdata.UserDataPlugin, cloudbaseinit.plugins.common.localscripts.LocalScriptsPlugin, cloudbaseinit.plugins.windows.createuser.CreateUserPlugin, cloudbaseinit.plugins.windows.extendvolumes.ExtendVolumesPlugin" cloudbase_metadata_services="" cloudbase_plugins_unattend="cloudbaseinit.plugins.common.mtu.MTUPlugin" cloudbase_metadata_services_unattend="" prepull=true wins_url= windows_updates_kbs="KB5009557" windows_updates_categories="" windows_service_manager=nssm nssm_url=https://upstreamartifacts.azureedge.net/nssm/nssm.exe distribution_version= netbios_host_name_compatibility=true disable_hypervisor=false cloudbase_logging_serial_port= load_additional_components=false additional_registry_images=false additional_registry_images_list= additional_url_images=false additional_url_images_list= additional_executables=false additional_executables_list= additional_executables_destination_path= ssh_source_url= debug_tools=true --extra-vars custom_role=true load_additional_components=true additional_registry_images=true additional_registry_images_list=docker.io/stefanscherer/whoami:windows-amd64-2.0.2 --extra-vars  -e ansible_password=***** -i /tmp/packer-provisioner-ansible1916536654 /mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/ansible/windows/node_windows.yml[0m
+[0;32m    virtualbox-iso: [WARNING]: Ansible is being run in a world writable directory[0m
+[0;32m    virtualbox-iso: (/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-[0m
+[0;32m    virtualbox-iso: builder/images/capi), ignoring it as an ansible.cfg source. For more[0m
+[0;32m    virtualbox-iso: information see[0m
+[0;32m    virtualbox-iso: https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-[0m
+[0;32m    virtualbox-iso: world-writable-dir[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: PLAY [all] *********************************************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Gathering Facts] *********************************************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Check if cloudbase-init url is set] **************************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Check if wins url is set] ************************************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Optimise powershell] *****************************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Get Install Drive] *******************************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Get Program Files Directory] *********************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Get All Users profile path] **********************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Get TEMP Directory] ******************************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : {{ role }}] ***********************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : systemprep] ***********************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Remove Windows updates default registry settings] ***********[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Add Windows update registry path] ***************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Add Windows automatic update registry path] *****************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Disable Windows automatic updates in registry] **************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Set Windows automatic updates to notify only in registry] ***[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Set WinRm Service to delayed start] *************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Update Windows Defender signatures] *************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Install Windows updates based on KB numbers] ****************[0m
+[0;32m    virtualbox-iso: [DEPRECATION WARNING]: 'whitelist' is deprecated. See the module docs for more[0m
+[0;32m    virtualbox-iso: information. This feature will be removed from ansible.windows in a release[0m
+[0;32m    virtualbox-iso: after 2023-06-01. Deprecation warnings can be disabled by setting[0m
+[0;32m    virtualbox-iso: deprecation_warnings=False in ansible.cfg.[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Install Windows updates based on Categories] ****************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Install OpenSSH] ********************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Create OpenSSH directory structure] *************************[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item=C:\Program Files\OpenSSH)[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item=C:\\ProgramData\ssh)[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Disable inheritance of OpenSSH directory] *******************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Remove permission for Users] ********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Download OpenSSH Archive] ***********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Unzip OpenSSH Archive] **************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Install OpenSSH] ********************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Add OpenSSH firewall rule] **********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Set default SSH shell to Powershell] ************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Create SSH program data folder] *****************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Enable ssh login without a password] ************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Set SSH service startup mode to auto and ensure it is started] ***[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Apply HNS control Flags 0x40 and 0x10 in 2022-11B patches] ***[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Apply WCIFS fix] ********************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Expand dynamic port range to 34000-65535 to avoid port exhaustion] ***[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Add required Windows Features] ******************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Add Hyper-V] ************************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Disable Hypervisor] *****************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Reboot] *****************************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : cloudbase-init] *******************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [cloudbase-init : Download Cloudbase-init] ********************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [cloudbase-init : Ensure log directory] ***********************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [cloudbase-init : Install Cloudbase-init] *********************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [cloudbase-init : Set up cloudbase-init unattend configuration] ***********[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [cloudbase-init : Set up cloudbase-init configuration] ********************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [cloudbase-init : Configure set up complete] ******************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : providers] ************************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [providers : include_tasks] ***********************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : runtimes] *************************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Download containerd] ******************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Create containerd directory structure] ************************[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=C:\Program Files\containerd)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=C:\\ProgramData\containerd\state)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=C:\\ProgramData\containerd\root)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=C:/opt/cni/bin)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=C:/etc/cni/net.d)[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Check if containerd exists] ***********************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Unpack containerd binaries] ***********************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Add containerd to path] ***************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Copy containerd config file config.toml] **********************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Check if a Containerd service is installed] *******************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Register Containerd] ******************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Apply SMB Resolution Fix for containerd] **********************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Create Windows Defender Exclusions] ***************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Ensure Containerd Service is running] *************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Pre-pull containerd images] ***********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Install Docker via OneGet] ************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Start Docker Service] *****************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Set up Docker Network] ****************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Pre-pull Docker images] ***************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : kubernetes] ***********************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Create kubernetes directory structure] **********************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Download kubernetes binaries] *******************************[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=kubeadm)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=kubectl)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=kubelet)[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Add kubernetes folder to path] ******************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Create kubelet directory structure] *************************[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=C:\var\log\kubelet)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=C:\etc\kubernetes)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=C:\etc\kubernetes\manifests)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=C:\etc\kubernetes\pki)[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Symlink kubelet pki folder] *********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Download nssm] **********************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Create kubelet start file for nssm] *************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Install kubelet via nssm] ***********************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Set dockershim args] ****************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Install kubelet as service] *********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Ensure kubelet is installed] ********************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Add firewall rule for kubelet] ******************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Get wins] ***************************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Register wins.exe] ******************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Ensure that wins service is running] ************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : gmsa] *****************************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Download gMSA Key Vault plugin] ***********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Unzip gMSA Key Vault Archive] *************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Copy gMSA Key Vault plugin to System32] ***************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Copy gMSA Key Vault installer file] *******************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Register gMSA Key Vault plugin] ***********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Install registry CCG logging manifest] ****************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Install registry Key Vault plugin logging manifest] ***************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Clean up gMSA install files] **************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : load_additional_components] *******************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Create temporary download dir] **************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Download additional executables] ************[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item=)[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Pull containerd additional images] **********[0m
+[0;32m    virtualbox-iso: ASYNC FAILED on default: jid=j545566017660.452[0m
+[0;32m    virtualbox-iso: FAILED - RETRYING: [default]: Pull containerd additional images (5 retries left).[0m
+[0;32m    virtualbox-iso: ASYNC POLL on default: jid=j526508541803.744 started=1 finished=0[0m
+[0;32m    virtualbox-iso: ASYNC OK on default: jid=j526508541803.744[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=docker.io/stefanscherer/whoami:windows-amd64-2.0.2)[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Pre-pull Docker additional images] **********[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item=docker.io/stefanscherer/whoami:windows-amd64-2.0.2)[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Create temporary download dir] **************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Download additional images from url] ********[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item=)[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Load additional images to containerd] *******[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'item': '', 'ansible_loop_var': 'item'})[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Load additional Docker images] **************[0m
+[0;32m    virtualbox-iso: ERROR! Invalid variable name in 'register' specified: 'import'[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item=)[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+2023/05/03 20:21:14 [INFO] (telemetry) ending ansible
+[1;31m==> virtualbox-iso: Error executing Ansible: Non-zero exit status: exit status 1[0m
+[1;32m==> virtualbox-iso: Step "StepProvision" failed[0m
+[1;32m==> virtualbox-iso: [c] Clean up and exit, [a] abort without cleanup, or [r] retry step (build may fail even if retry succeeds)?[0m 2023/05/03 20:46:13 packer-builder-virtualbox-iso plugin: Running the provision hook
+2023/05/03 20:46:13 [INFO] (telemetry) Starting provisioner ansible
+[1;32m==> virtualbox-iso: Provisioning with Ansible...[0m
+    virtualbox-iso: 	Using WinRM Password from Packer communicator...[0m
+[0;32m    virtualbox-iso: Not using Proxy adapter for Ansible run:
+    virtualbox-iso: 	Using WinRM Password from Packer communicator...[0m
+2023/05/03 20:46:13 packer-provisioner-ansible plugin: Creating inventory file for Ansible run...
+[1;32m==> virtualbox-iso: Executing Ansible: ansible-playbook -e packer_build_name="virtualbox-iso" -e packer_builder_type=virtualbox-iso -e packer_http_addr=10.0.2.2:0 -e ansible_winrm_scheme=http --extra-vars runtime=containerd docker_ee_version=19.03.12 containerd_url=https://github.com/containerd/containerd/releases/download/v1.6.20/containerd-1.6.20-windows-amd64.tar.gz containerd_sha256=7718a5f68a21106026ac16ce4bc7575d33db5a7d70f729545fb476160b215e10 pause_image=registry.k8s.io/pause:3.9 additional_debug_files="" containerd_additional_settings= custom_role_names="utilities" http_proxy= https_proxy= no_proxy= kubernetes_base_url=https://kubernetesreleases.blob.core.windows.net/kubernetes/v1.24.11/binaries/node/windows/amd64 kubernetes_semver=v1.24.11 kubernetes_install_path=c:\k cloudbase_init_url="https://github.com/cloudbase/cloudbase-init/releases/download/1.1.4/CloudbaseInitSetup_1_1_4_x64.msi" cloudbase_plugins="cloudbaseinit.plugins.common.ephemeraldisk.EphemeralDiskPlugin, cloudbaseinit.plugins.common.mtu.MTUPlugin, cloudbaseinit.plugins.common.sethostname.SetHostNamePlugin,  cloudbaseinit.plugins.common.sshpublickeys.SetUserSSHPublicKeysPlugin, cloudbaseinit.plugins.common.userdata.UserDataPlugin, cloudbaseinit.plugins.common.localscripts.LocalScriptsPlugin, cloudbaseinit.plugins.windows.createuser.CreateUserPlugin, cloudbaseinit.plugins.windows.extendvolumes.ExtendVolumesPlugin" cloudbase_metadata_services="" cloudbase_plugins_unattend="cloudbaseinit.plugins.common.mtu.MTUPlugin" cloudbase_metadata_services_unattend="" prepull=true wins_url= windows_updates_kbs="KB5009557" windows_updates_categories="" windows_service_manager=nssm nssm_url=https://upstreamartifacts.azureedge.net/nssm/nssm.exe distribution_version= netbios_host_name_compatibility=true disable_hypervisor=false cloudbase_logging_serial_port= load_additional_components=false additional_registry_images=false additional_registry_images_list= additional_url_images=false additional_url_images_list= additional_executables=false additional_executables_list= additional_executables_destination_path= ssh_source_url= debug_tools=true --extra-vars custom_role=true load_additional_components=true additional_registry_images=true additional_registry_images_list=docker.io/stefanscherer/whoami:windows-amd64-2.0.2 --extra-vars  -e ansible_password=***** -i /tmp/packer-provisioner-ansible1648682615 /mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-builder/images/capi/ansible/windows/node_windows.yml[0m
+[0;32m    virtualbox-iso: [WARNING]: Ansible is being run in a world writable directory[0m
+[0;32m    virtualbox-iso: (/mnt/d/_kubernetes/sig-windows-dev-tools/experiments/image-builder/image-[0m
+[0;32m    virtualbox-iso: builder/images/capi), ignoring it as an ansible.cfg source. For more[0m
+[0;32m    virtualbox-iso: information see[0m
+[0;32m    virtualbox-iso: https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-[0m
+[0;32m    virtualbox-iso: world-writable-dir[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: PLAY [all] *********************************************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Gathering Facts] *********************************************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Check if cloudbase-init url is set] **************************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Check if wins url is set] ************************************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Optimise powershell] *****************************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Get Install Drive] *******************************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Get Program Files Directory] *********************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Get All Users profile path] **********************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [Get TEMP Directory] ******************************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : {{ role }}] ***********************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : systemprep] ***********************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Remove Windows updates default registry settings] ***********[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Add Windows update registry path] ***************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Add Windows automatic update registry path] *****************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Disable Windows automatic updates in registry] **************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Set Windows automatic updates to notify only in registry] ***[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Set WinRm Service to delayed start] *************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Update Windows Defender signatures] *************************[0m
+[0;32m    virtualbox-iso: fatal: [default]: FAILED! => {"changed": true, "cmd": "$service = Get-Service \"Windefend\"\n$service.WaitForStatus(\"Running\",\"00:5:00\")\nUpdate-MpSignature", "delta": "0:01:19.662705", "end": "2023-05-03 19:49:19.302245", "msg": "non-zero return code", "rc": 1, "start": "2023-05-03 19:47:59.639540", "stderr": "Update-MpSignature : The remote procedure call failed. \r\nAt line:3 char:1\r\n+ Update-MpSignature\r\n+ ~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (MSFT_MpSignature:ROOT\\Microsoft\\...SFT_MpSignature) [Update-MpSignature], \r\n    CimException\r\n    + FullyQualifiedErrorId : HRESULT 0x800706be,Update-MpSignature", "stderr_lines": ["Update-MpSignature : The remote procedure call failed. ", "At line:3 char:1", "+ Update-MpSignature", "+ ~~~~~~~~~~~~~~~~~~", "    + CategoryInfo          : NotSpecified: (MSFT_MpSignature:ROOT\\Microsoft\\...SFT_MpSignature) [Update-MpSignature], ", "    CimException", "    + FullyQualifiedErrorId : HRESULT 0x800706be,Update-MpSignature"], "stdout": "", "stdout_lines": []}[0m
+[0;32m    virtualbox-iso: ...ignoring[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Install Windows updates based on KB numbers] ****************[0m
+[0;32m    virtualbox-iso: [DEPRECATION WARNING]: 'whitelist' is deprecated. See the module docs for more[0m
+[0;32m    virtualbox-iso: information. This feature will be removed from ansible.windows in a release[0m
+[0;32m    virtualbox-iso: after 2023-06-01. Deprecation warnings can be disabled by setting[0m
+[0;32m    virtualbox-iso: deprecation_warnings=False in ansible.cfg.[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Install Windows updates based on Categories] ****************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Install OpenSSH] ********************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Create OpenSSH directory structure] *************************[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item=C:\Program Files\OpenSSH)[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item=C:\\ProgramData\ssh)[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Disable inheritance of OpenSSH directory] *******************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Remove permission for Users] ********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Download OpenSSH Archive] ***********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Unzip OpenSSH Archive] **************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Install OpenSSH] ********************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Add OpenSSH firewall rule] **********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Set default SSH shell to Powershell] ************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Create SSH program data folder] *****************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Enable ssh login without a password] ************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Set SSH service startup mode to auto and ensure it is started] ***[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Apply HNS control Flags 0x40 and 0x10 in 2022-11B patches] ***[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Apply WCIFS fix] ********************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Expand dynamic port range to 34000-65535 to avoid port exhaustion] ***[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Add required Windows Features] ******************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Add Hyper-V] ************************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Disable Hypervisor] *****************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [systemprep : Reboot] *****************************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : cloudbase-init] *******************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [cloudbase-init : Download Cloudbase-init] ********************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [cloudbase-init : Ensure log directory] ***********************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [cloudbase-init : Install Cloudbase-init] *********************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [cloudbase-init : Set up cloudbase-init unattend configuration] ***********[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [cloudbase-init : Set up cloudbase-init configuration] ********************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [cloudbase-init : Configure set up complete] ******************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : providers] ************************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [providers : include_tasks] ***********************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : runtimes] *************************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Download containerd] ******************************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Create containerd directory structure] ************************[0m
+[0;32m    virtualbox-iso: ok: [default] => (item=C:\Program Files\containerd)[0m
+[0;32m    virtualbox-iso: ok: [default] => (item=C:\\ProgramData\containerd\state)[0m
+[0;32m    virtualbox-iso: ok: [default] => (item=C:\\ProgramData\containerd\root)[0m
+[0;32m    virtualbox-iso: ok: [default] => (item=C:/opt/cni/bin)[0m
+[0;32m    virtualbox-iso: ok: [default] => (item=C:/etc/cni/net.d)[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Check if containerd exists] ***********************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Unpack containerd binaries] ***********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Add containerd to path] ***************************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Copy containerd config file config.toml] **********************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Check if a Containerd service is installed] *******************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Register Containerd] ******************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Apply SMB Resolution Fix for containerd] **********************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Create Windows Defender Exclusions] ***************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Ensure Containerd Service is running] *************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Pre-pull containerd images] ***********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Install Docker via OneGet] ************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Start Docker Service] *****************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Set up Docker Network] ****************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [runtimes : Pre-pull Docker images] ***************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : kubernetes] ***********************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Create kubernetes directory structure] **********************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Download kubernetes binaries] *******************************[0m
+[0;32m    virtualbox-iso: ok: [default] => (item=kubeadm)[0m
+[0;32m    virtualbox-iso: ok: [default] => (item=kubectl)[0m
+[0;32m    virtualbox-iso: ok: [default] => (item=kubelet)[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Add kubernetes folder to path] ******************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Create kubelet directory structure] *************************[0m
+[0;32m    virtualbox-iso: ok: [default] => (item=C:\var\log\kubelet)[0m
+[0;32m    virtualbox-iso: ok: [default] => (item=C:\etc\kubernetes)[0m
+[0;32m    virtualbox-iso: ok: [default] => (item=C:\etc\kubernetes\manifests)[0m
+[0;32m    virtualbox-iso: ok: [default] => (item=C:\etc\kubernetes\pki)[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Symlink kubelet pki folder] *********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Download nssm] **********************************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Create kubelet start file for nssm] *************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Install kubelet via nssm] ***********************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Set dockershim args] ****************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Install kubelet as service] *********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Ensure kubelet is installed] ********************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Add firewall rule for kubelet] ******************************[0m
+[0;32m    virtualbox-iso: ok: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Get wins] ***************************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Register wins.exe] ******************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [kubernetes : Ensure that wins service is running] ************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : gmsa] *****************************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Download gMSA Key Vault plugin] ***********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Unzip gMSA Key Vault Archive] *************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Copy gMSA Key Vault plugin to System32] ***************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Copy gMSA Key Vault installer file] *******************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Register gMSA Key Vault plugin] ***********************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Install registry CCG logging manifest] ****************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Install registry Key Vault plugin logging manifest] ***************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [gmsa : Clean up gMSA install files] **************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : load_additional_components] *******************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Create temporary download dir] **************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Download additional executables] ************[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item=)[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Pull containerd additional images] **********[0m
+[0;32m    virtualbox-iso: ASYNC OK on default: jid=j104718135756.4472[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=docker.io/stefanscherer/whoami:windows-amd64-2.0.2)[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Pre-pull Docker additional images] **********[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item=docker.io/stefanscherer/whoami:windows-amd64-2.0.2)[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Create temporary download dir] **************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Download additional images from url] ********[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item=)[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Load additional images to containerd] *******[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'item': '', 'ansible_loop_var': 'item'})[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Load additional Docker images] **************[0m
+[0;32m    virtualbox-iso: skipping: [default] => (item=)[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [load_additional_components : Remove downloaded files] ********************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : debug] ****************************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [debug : Add debug tools directory] ***************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [debug : Get debug files] *************************************************[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=https://github.com/microsoft/SDN/raw/master/Kubernetes/windows/debug/collectlogs.ps1)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=https://github.com/microsoft/SDN/raw/master/Kubernetes/windows/debug/dumpVfpPolicies.ps1)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=https://github.com/microsoft/SDN/raw/master/Kubernetes/windows/debug/portReservationTest.ps1)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=https://github.com/microsoft/SDN/raw/master/Kubernetes/windows/debug/starthnstrace.cmd)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=https://github.com/microsoft/SDN/raw/master/Kubernetes/windows/debug/startpacketcapture.cmd)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=https://github.com/microsoft/SDN/raw/master/Kubernetes/windows/debug/stoppacketcapture.cmd)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=https://github.com/Microsoft/SDN/raw/master/Kubernetes/windows/debug/VFP.psm1)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=https://github.com/microsoft/SDN/raw/master/Kubernetes/windows/helper.psm1)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=https://github.com/Microsoft/SDN/raw/master/Kubernetes/windows/hns.psm1)[0m
+[0;32m    virtualbox-iso: changed: [default] => (item=https://raw.githubusercontent.com/kubernetes-sigs/sig-windows-tools/master/hack/DebugWindowsNode.ps1)[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [debug : Get additional debug files] **************************************[0m
+[0;32m    virtualbox-iso: skipping: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [include_role : {{ role }}] ***********************************************[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [utilities : Enable ssh login with password] ******************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [utilities : Download Kubernetes kube-proxy] ******************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [utilities : Download crictl] *********************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [utilities : Decompress crictl binary] ************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [utilities : Ensure Chocolatey itself is installed and use internal repo as source] ***[0m
+[0;32m    virtualbox-iso: [WARNING]: Chocolatey was missing from this system, so it was installed during[0m
+[0;32m    virtualbox-iso: this task run.[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: TASK [utilities : Install vim via Choco] ***************************************[0m
+[0;32m    virtualbox-iso: changed: [default][0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: PLAY RECAP *********************************************************************[0m
+[0;32m    virtualbox-iso: default                    : ok=58   changed=29   unreachable=0    failed=0    skipped=43   rescued=0    ignored=1[0m
+[0;32m    virtualbox-iso:[0m
+2023/05/03 21:05:39 [INFO] (telemetry) ending ansible
+2023/05/03 21:05:39 [INFO] (telemetry) Starting provisioner windows-restart
+[1;32m==> virtualbox-iso: Restarting Machine[0m
+2023/05/03 21:05:39 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: powershell "& {(Get-WmiObject win32_operatingsystem).LastBootUpTime > C:\ProgramData\lastboot.txt; Restart-Computer -force}"
+2023/05/03 21:05:41 packer-builder-virtualbox-iso plugin: [INFO] command 'powershell "& {(Get-WmiObject win32_operatingsystem).LastBootUpTime > C:\ProgramData\lastboot.txt; Restart-Computer -force}"' exited with code: 0
+2023/05/03 21:05:41 packer-builder-virtualbox-iso plugin: [INFO] RPC endpoint: Communicator ended with: 0
+2023/05/03 21:05:41 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:05:41 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:05:41 [INFO] RPC client: Communicator ended with: 0
+2023/05/03 21:05:41 [INFO] RPC endpoint: Communicator ended with: 0
+2023/05/03 21:05:41 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:05:41 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:05:41 packer-provisioner-windows-restart plugin: [INFO] RPC client: Communicator ended with: 0
+[1;32m==> virtualbox-iso: Waiting for machine to restart...[0m
+2023/05/03 21:05:41 packer-provisioner-windows-restart plugin: Check if machine is rebooting...
+2023/05/03 21:05:41 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: shutdown /r /f /t 60 /c "packer restart test"
+2023/05/03 21:05:41 packer-builder-virtualbox-iso plugin: [INFO] command 'shutdown /r /f /t 60 /c "packer restart test"' exited with code: 1115
+2023/05/03 21:05:41 packer-builder-virtualbox-iso plugin: [INFO] RPC endpoint: Communicator ended with: 1115
+2023/05/03 21:05:41 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:05:41 [INFO] 40 bytes written for 'stderr'
+2023/05/03 21:05:41 [INFO] RPC client: Communicator ended with: 1115
+2023/05/03 21:05:41 [INFO] RPC endpoint: Communicator ended with: 1115
+2023/05/03 21:05:41 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:05:41 packer-provisioner-windows-restart plugin: [INFO] 40 bytes written for 'stderr'
+[1;31m==> virtualbox-iso: A system shutdown is in progress.(1115)[0m
+2023/05/03 21:05:41 packer-provisioner-windows-restart plugin: [INFO] RPC client: Communicator ended with: 1115
+2023/05/03 21:05:41 packer-provisioner-windows-restart plugin: Reboot already in progress, waiting...
+2023/05/03 21:05:51 packer-provisioner-windows-restart plugin: Check if machine is rebooting...
+2023/05/03 21:05:51 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:05:51 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:05:51 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:05:51 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:05:51 packer-provisioner-windows-restart plugin: Waiting for machine to reboot with timeout: 5m0s
+2023/05/03 21:05:51 packer-provisioner-windows-restart plugin: Waiting for machine to become available...
+2023/05/03 21:05:51 packer-provisioner-windows-restart plugin: Checking that communicator is connected with: 'powershell -command "& {if ((get-content C:\ProgramData\lastboot.txt) -eq (Get-WmiObject win32_operatingsystem).LastBootUpTime) {Write-Output 'Sleeping for 600 seconds to wait for reboot'; start-sleep 600} else {Write-Output 'Reboot complete'}}"'
+2023/05/03 21:06:29 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:29 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:29 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:29 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:29 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:43668->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:06:34 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:34 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:34 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:34 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:60608->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:06:34 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:39 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:39 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:39 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:39 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:39 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:45140->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:06:44 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:44 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:44 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:44 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:45150->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:06:44 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:49 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:49 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:49 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:49 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:49 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:46434->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:06:54 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:54 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:54 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:54 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:46436->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:06:54 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:59 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:59 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:06:59 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:06:59 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:38308->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:06:59 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:04 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:04 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:04 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:04 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:04 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:38318->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:07:09 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:09 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:09 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:09 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:47310->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:07:09 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:14 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:14 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:14 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:14 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:14 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:47320->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:07:19 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:19 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:19 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:19 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:37440->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:07:19 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:24 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:24 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:24 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:24 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:24 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:37448->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:07:29 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:29 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:29 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:29 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:29 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:35914->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:07:34 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:34 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:34 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:34 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:35926->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:07:34 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:39 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:39 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:39 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:39 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:45240->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:07:39 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:44 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:44 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:44 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:44 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:44 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:45256->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:07:49 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:49 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:49 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:49 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:55090->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:07:49 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:54 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:54 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:54 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:54 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:54 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:55098->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:07:59 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:59 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:07:59 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:07:59 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:34824->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:07:59 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:04 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:04 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:04 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:04 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:34832->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:08:04 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:09 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:09 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:09 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:09 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:09 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:41524->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:08:14 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:14 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:14 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:14 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:41526->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:08:14 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:19 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:19 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:19 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:19 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:39208->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:08:19 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:24 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:24 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:24 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:24 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:24 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:39216->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:08:29 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:29 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:29 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:29 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:29 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:46214->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:08:34 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:34 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:34 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:34 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:34 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:46222->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:08:39 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:39 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:39 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:39 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:60934->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:08:39 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:44 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:44 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:44 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:44 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:44 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:60938->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:08:49 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:49 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:49 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:08:49 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:49 packer-provisioner-windows-restart plugin: Communication connection err: unknown error Post "http://10.0.1.111:4443/wsman": read tcp 172.21.99.252:48550->10.0.1.111:4443: read: connection reset by peer
+2023/05/03 21:08:56 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: powershell -command "& {if ((get-content C:\ProgramData\lastboot.txt) -eq (Get-WmiObject win32_operatingsystem).LastBootUpTime) {Write-Output 'Sleeping for 600 seconds to wait for reboot'; start-sleep 600} else {Write-Output 'Reboot complete'}}"
+2023/05/03 21:08:57 packer-builder-virtualbox-iso plugin: [INFO] command 'powershell -command "& {if ((get-content C:\ProgramData\lastboot.txt) -eq (Get-WmiObject win32_operatingsystem).LastBootUpTime) {Write-Output 'Sleeping for 600 seconds to wait for reboot'; start-sleep 600} else {Write-Output 'Reboot complete'}}"' exited with code: 0
+2023/05/03 21:08:57 packer-builder-virtualbox-iso plugin: [INFO] RPC endpoint: Communicator ended with: 0
+2023/05/03 21:08:57 [INFO] 17 bytes written for 'stdout'
+2023/05/03 21:08:57 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:57 [INFO] RPC client: Communicator ended with: 0
+2023/05/03 21:08:57 [INFO] RPC endpoint: Communicator ended with: 0
+[0;32m    virtualbox-iso: Reboot complete[0m
+2023/05/03 21:08:57 packer-provisioner-windows-restart plugin: [INFO] 17 bytes written for 'stdout'
+2023/05/03 21:08:57 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:57 packer-provisioner-windows-restart plugin: [INFO] RPC client: Communicator ended with: 0
+2023/05/03 21:08:57 packer-provisioner-windows-restart plugin: Connected to machine
+2023/05/03 21:08:57 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: powershell.exe -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7AGUAYwBoAG8AIAAoACIAewAwAH0AIAByAGUAcwB0AGEAcgB0AGUAZAAuACIAIAAtAGYAIABbAFMAeQBzAHQAZQBtAC4ATgBlAHQALgBEAG4AcwBdADoAOgBHAGUAdABIAG8AcwB0AE4AYQBtAGUAKAApACkA
+2023/05/03 21:08:58 packer-builder-virtualbox-iso plugin: [INFO] command 'powershell.exe -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQAgAD0AIAAnAFMAaQBsAGUAbgB0AGwAeQBDAG8AbgB0AGkAbgB1AGUAJwA7AGUAYwBoAG8AIAAoACIAewAwAH0AIAByAGUAcwB0AGEAcgB0AGUAZAAuACIAIAAtAGYAIABbAFMAeQBzAHQAZQBtAC4ATgBlAHQALgBEAG4AcwBdADoAOgBHAGUAdABIAG8AcwB0AE4AYQBtAGUAKAApACkA' exited with code: 0
+2023/05/03 21:08:58 packer-builder-virtualbox-iso plugin: [INFO] RPC endpoint: Communicator ended with: 0
+2023/05/03 21:08:58 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:58 [INFO] 28 bytes written for 'stdout'
+2023/05/03 21:08:58 [INFO] RPC client: Communicator ended with: 0
+2023/05/03 21:08:58 [INFO] RPC endpoint: Communicator ended with: 0
+2023/05/03 21:08:58 packer-provisioner-windows-restart plugin: [INFO] 28 bytes written for 'stdout'
+2023/05/03 21:08:58 packer-provisioner-windows-restart plugin: [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:08:58 packer-provisioner-windows-restart plugin: [INFO] RPC client: Communicator ended with: 0
+[0;32m    virtualbox-iso: VAGRANT-PJCVD0H restarted.[0m
+[1;32m==> virtualbox-iso: Machine successfully restarted, moving on[0m
+2023/05/03 21:08:58 [INFO] (telemetry) ending windows-restart
+2023/05/03 21:08:58 [INFO] (telemetry) Starting provisioner goss
+[1;32m==> virtualbox-iso: Provisioning with Goss[0m
+[1;32m==> virtualbox-iso: Configured to run on Windows[0m
+[0;32m    virtualbox-iso: Creating directory: /tmp/goss[0m
+2023/05/03 21:08:58 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: powershell /c mkdir -p '/tmp/goss'
+2023/05/03 21:09:00 packer-builder-virtualbox-iso plugin: [INFO] command 'powershell /c mkdir -p '/tmp/goss'' exited with code: 0
+2023/05/03 21:09:00 packer-builder-virtualbox-iso plugin: [INFO] RPC endpoint: Communicator ended with: 0
+2023/05/03 21:09:00 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:09:00 [INFO] 398 bytes written for 'stdout'
+2023/05/03 21:09:00 [INFO] RPC client: Communicator ended with: 0
+2023/05/03 21:09:00 [INFO] RPC endpoint: Communicator ended with: 0
+2023/05/03 21:09:00 packer-provisioner-goss plugin: 2023/05/03 21:09:00 [INFO] 398 bytes written for 'stdout'
+2023/05/03 21:09:00 packer-provisioner-goss plugin: 2023/05/03 21:09:00 [INFO] 0 bytes written for 'stderr'
+[0;32m    virtualbox-iso:[0m
+2023/05/03 21:09:00 packer-provisioner-goss plugin: 2023/05/03 21:09:00 [INFO] RPC client: Communicator ended with: 0
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso:     Directory: C:\tmp[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: Mode                LastWriteTime         Length Name[0m
+[0;32m    virtualbox-iso: ----                -------------         ------ ----[0m
+[0;32m    virtualbox-iso: d-----         5/3/2023   1:08 PM                goss[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: Installing Goss from, https://github.com/aelsabbahy/goss/releases/download/v0.3.16/goss-alpha-windows-amd64.exe[0m
+[0;32m    virtualbox-iso: Downloading Goss to /tmp/goss-0.3.16-windows-amd64.exe[0m
+2023/05/03 21:09:00 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: curl -L   -o /tmp/goss-0.3.16-windows-amd64.exe https://github.com/aelsabbahy/goss/releases/download/v0.3.16/goss-alpha-windows-amd64.exe || wget   -O /tmp/goss-0.3.16-windows-amd64.exe https://github.com/aelsabbahy/goss/releases/download/v0.3.16/goss-alpha-windows-amd64.exe
+[1;31m==> virtualbox-iso:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current[0m
+[1;31m==> virtualbox-iso:                                  Dload  Upload   Total   Spent    Left  Speed[0m
+[1;31m==> virtualbox-iso:   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[0m
+[1;31m==> virtualbox-iso:   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[0m
+2023/05/03 21:09:04 packer-builder-virtualbox-iso plugin: [INFO] command 'curl -L   -o /tmp/goss-0.3.16-windows-amd64.exe https://github.com/aelsabbahy/goss/releases/download/v0.3.16/goss-alpha-windows-amd64.exe || wget   -O /tmp/goss-0.3.16-windows-amd64.exe https://github.com/aelsabbahy/goss/releases/download/v0.3.16/goss-alpha-windows-amd64.exe' exited with code: 0
+2023/05/03 21:09:04 packer-builder-virtualbox-iso plugin: [INFO] RPC endpoint: Communicator ended with: 0
+2023/05/03 21:09:04 [INFO] 719 bytes written for 'stderr'
+2023/05/03 21:09:04 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:09:04 [INFO] RPC client: Communicator ended with: 0
+2023/05/03 21:09:04 [INFO] RPC endpoint: Communicator ended with: 0
+2023/05/03 21:09:04 packer-provisioner-goss plugin: 2023/05/03 21:09:04 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:09:04 packer-provisioner-goss plugin: 2023/05/03 21:09:04 [INFO] 719 bytes written for 'stderr'
+2023/05/03 21:09:04 packer-provisioner-goss plugin: 2023/05/03 21:09:04 [INFO] RPC client: Communicator ended with: 0
+[1;31m==> virtualbox-iso: 100 11.7M  100 11.7M    0     0  3671k      0  0:00:03  0:00:03 --:--:-- 4999k[0m
+2023/05/03 21:09:04 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: chmod 555 /tmp/goss-0.3.16-windows-amd64.exe && /tmp/goss-0.3.16-windows-amd64.exe --version
+2023/05/03 21:09:04 packer-builder-virtualbox-iso plugin: [INFO] command 'chmod 555 /tmp/goss-0.3.16-windows-amd64.exe && /tmp/goss-0.3.16-windows-amd64.exe --version' exited with code: 1
+2023/05/03 21:09:04 packer-builder-virtualbox-iso plugin: [INFO] RPC endpoint: Communicator ended with: 1
+2023/05/03 21:09:04 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:09:04 [INFO] 96 bytes written for 'stderr'
+2023/05/03 21:09:04 [INFO] RPC client: Communicator ended with: 1
+2023/05/03 21:09:04 [INFO] RPC endpoint: Communicator ended with: 1
+2023/05/03 21:09:04 packer-provisioner-goss plugin: 2023/05/03 21:09:04 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:09:04 packer-provisioner-goss plugin: 2023/05/03 21:09:04 [INFO] 96 bytes written for 'stderr'
+2023/05/03 21:09:04 packer-provisioner-goss plugin: 2023/05/03 21:09:04 [INFO] RPC client: Communicator ended with: 1
+[1;31m==> virtualbox-iso: 'chmod' is not recognized as an internal or external command,[0m
+[1;31m==> virtualbox-iso: operable program or batch file.[0m
+[1;32m==> virtualbox-iso: Uploading goss tests...[0m
+[0;32m    virtualbox-iso: Uploading vars file packer/goss/goss-vars.yaml[0m
+2023/05/03 21:09:04 packer-builder-virtualbox-iso plugin: Uploading file to '/tmp/goss/goss-vars.yaml'
+2023/05/03 21:09:04 packer-provisioner-goss plugin: 2023/05/03 21:09:04 [INFO] 13225 bytes written for 'uploadData'
+2023/05/03 21:09:04 [INFO] 13225 bytes written for 'uploadData'
+[0;32m    virtualbox-iso: Inline variables are --vars-inline {'OS':'windows','PROVIDER':'virtualbox','containerd_version':'1.6.20','distribution_version':'2019','docker_ee_version':'19.03.12','kubernetes_version':'v1.24.11','pause_image':'registry.k8s.io/pause:3.9','runtime':'containerd'}[0m
+[0;32m    virtualbox-iso: Env variables are set "GOSS_MAX_CONCURRENT=1" && set "GOSS_USE_ALPHA=1" &&[0m
+[0;32m    virtualbox-iso: Uploading Dir packer/goss[0m
+[0;32m    virtualbox-iso: Creating directory: /tmp/goss/goss[0m
+2023/05/03 21:09:11 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: powershell /c mkdir -p '/tmp/goss/goss'
+2023/05/03 21:09:12 packer-builder-virtualbox-iso plugin: [INFO] command 'powershell /c mkdir -p '/tmp/goss/goss'' exited with code: 0
+2023/05/03 21:09:12 packer-builder-virtualbox-iso plugin: [INFO] RPC endpoint: Communicator ended with: 0
+2023/05/03 21:09:12 [INFO] 403 bytes written for 'stdout'
+2023/05/03 21:09:12 [INFO] 0 bytes written for 'stderr'
+[0;32m    virtualbox-iso:[0m
+2023/05/03 21:09:12 [INFO] RPC client: Communicator ended with: 0
+2023/05/03 21:09:12 [INFO] RPC endpoint: Communicator ended with: 0
+2023/05/03 21:09:12 packer-provisioner-goss plugin: 2023/05/03 21:09:12 [INFO] 403 bytes written for 'stdout'
+2023/05/03 21:09:12 packer-provisioner-goss plugin: 2023/05/03 21:09:12 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:09:12 packer-provisioner-goss plugin: 2023/05/03 21:09:12 [INFO] RPC client: Communicator ended with: 0
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso:     Directory: C:\tmp\goss[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso: Mode                LastWriteTime         Length Name[0m
+[0;32m    virtualbox-iso: ----                -------------         ------ ----[0m
+[0;32m    virtualbox-iso: d-----         5/3/2023   1:09 PM                goss[0m
+[0;32m    virtualbox-iso:[0m
+[0;32m    virtualbox-iso:[0m
+2023/05/03 21:09:12 packer-builder-virtualbox-iso plugin: Uploading dir 'packer/goss/' to '/tmp/goss/goss'
+==> virtualbox-iso: 
+==> virtualbox-iso: 
+[1;32m==> virtualbox-iso: 
+==> virtualbox-iso: Running goss tests...[0m
+==> virtualbox-iso: 
+==> virtualbox-iso: 
+==> virtualbox-iso: Running goss tests...[0m
+[1;32m==> virtualbox-iso: Running GOSS render debug command: cd /tmp/goss && set "GOSS_MAX_CONCURRENT=1" && set "GOSS_USE_ALPHA=1" &&  /tmp/goss-0.3.16-windows-amd64.exe --gossfile goss/goss.yaml --vars /tmp/goss/goss-vars.yaml --vars-inline {'OS':'windows','PROVIDER':'virtualbox','containerd_version':'1.6.20','distribution_version':'2019','docker_ee_version':'19.03.12','kubernetes_version':'v1.24.11','pause_image':'registry.k8s.io/pause:3.9','runtime':'containerd'} render -d > /tmp/debug-goss-spec.yaml[0m
+2023/05/03 21:09:42 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: cd /tmp/goss && set "GOSS_MAX_CONCURRENT=1" && set "GOSS_USE_ALPHA=1" &&  /tmp/goss-0.3.16-windows-amd64.exe --gossfile goss/goss.yaml --vars /tmp/goss/goss-vars.yaml --vars-inline {'OS':'windows','PROVIDER':'virtualbox','containerd_version':'1.6.20','distribution_version':'2019','docker_ee_version':'19.03.12','kubernetes_version':'v1.24.11','pause_image':'registry.k8s.io/pause:3.9','runtime':'containerd'} render -d > /tmp/debug-goss-spec.yaml
+2023/05/03 21:09:44 packer-builder-virtualbox-iso plugin: [INFO] command 'cd /tmp/goss && set "GOSS_MAX_CONCURRENT=1" && set "GOSS_USE_ALPHA=1" &&  /tmp/goss-0.3.16-windows-amd64.exe --gossfile goss/goss.yaml --vars /tmp/goss/goss-vars.yaml --vars-inline {'OS':'windows','PROVIDER':'virtualbox','containerd_version':'1.6.20','distribution_version':'2019','docker_ee_version':'19.03.12','kubernetes_version':'v1.24.11','pause_image':'registry.k8s.io/pause:3.9','runtime':'containerd'} render -d > /tmp/debug-goss-spec.yaml' exited with code: 1
+2023/05/03 21:09:44 packer-builder-virtualbox-iso plugin: [INFO] RPC endpoint: Communicator ended with: 1
+2023/05/03 21:09:44 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:09:44 [INFO] 161 bytes written for 'stderr'
+2023/05/03 21:09:44 [INFO] RPC client: Communicator ended with: 1
+2023/05/03 21:09:44 [INFO] RPC endpoint: Communicator ended with: 1
+[1;31m==> virtualbox-iso: could not read json data in goss\goss-command.yaml: template: test:241:14: executing "test" at <.Vars.ssh_source_url>: map has no entry for key "ssh_source_url"[0m
+2023/05/03 21:09:44 packer-provisioner-goss plugin: 2023/05/03 21:09:44 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:09:44 packer-provisioner-goss plugin: 2023/05/03 21:09:44 [INFO] 161 bytes written for 'stderr'
+2023/05/03 21:09:44 packer-provisioner-goss plugin: 2023/05/03 21:09:44 [INFO] RPC client: Communicator ended with: 1
+[1;32m==> virtualbox-iso: Goss render debug failed[0m
+[1;32m==> virtualbox-iso: Inspect mode on : proceeding without failing Packer[0m
+[1;32m==> virtualbox-iso: Running GOSS validate command: cd /tmp/goss &&  set "GOSS_MAX_CONCURRENT=1" && set "GOSS_USE_ALPHA=1" &&  /tmp/goss-0.3.16-windows-amd64.exe --gossfile goss/goss.yaml --vars /tmp/goss/goss-vars.yaml --vars-inline {'OS':'windows','PROVIDER':'virtualbox','containerd_version':'1.6.20','distribution_version':'2019','docker_ee_version':'19.03.12','kubernetes_version':'v1.24.11','pause_image':'registry.k8s.io/pause:3.9','runtime':'containerd'} validate --retry-timeout 0s --sleep 1s -f json -o pretty[0m
+2023/05/03 21:09:45 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: cd /tmp/goss &&  set "GOSS_MAX_CONCURRENT=1" && set "GOSS_USE_ALPHA=1" &&  /tmp/goss-0.3.16-windows-amd64.exe --gossfile goss/goss.yaml --vars /tmp/goss/goss-vars.yaml --vars-inline {'OS':'windows','PROVIDER':'virtualbox','containerd_version':'1.6.20','distribution_version':'2019','docker_ee_version':'19.03.12','kubernetes_version':'v1.24.11','pause_image':'registry.k8s.io/pause:3.9','runtime':'containerd'} validate --retry-timeout 0s --sleep 1s -f json -o pretty
+2023/05/03 21:09:45 packer-builder-virtualbox-iso plugin: [INFO] command 'cd /tmp/goss &&  set "GOSS_MAX_CONCURRENT=1" && set "GOSS_USE_ALPHA=1" &&  /tmp/goss-0.3.16-windows-amd64.exe --gossfile goss/goss.yaml --vars /tmp/goss/goss-vars.yaml --vars-inline {'OS':'windows','PROVIDER':'virtualbox','containerd_version':'1.6.20','distribution_version':'2019','docker_ee_version':'19.03.12','kubernetes_version':'v1.24.11','pause_image':'registry.k8s.io/pause:3.9','runtime':'containerd'} validate --retry-timeout 0s --sleep 1s -f json -o pretty' exited with code: 1
+2023/05/03 21:09:45 packer-builder-virtualbox-iso plugin: [INFO] RPC endpoint: Communicator ended with: 1
+2023/05/03 21:09:45 [INFO] 168 bytes written for 'stdout'
+2023/05/03 21:09:45 [INFO] 0 bytes written for 'stderr'
+2023/05/03 21:09:45 [INFO] RPC client: Communicator ended with: 1
+2023/05/03 21:09:45 [INFO] RPC endpoint: Communicator ended with: 1
+2023/05/03 21:09:45 packer-provisioner-goss plugin: 2023/05/03 21:09:45 [INFO] 168 bytes written for 'stdout'
+2023/05/03 21:09:45 packer-provisioner-goss plugin: 2023/05/03 21:09:45 [INFO] 0 bytes written for 'stderr'
+[0;32m    virtualbox-iso: Error: could not read json data in goss\goss-command.yaml: template: test:241:14: executing "test" at <.Vars.ssh_source_url>: map has no entry for key "ssh_source_url"[0m
+2023/05/03 21:09:45 packer-provisioner-goss plugin: 2023/05/03 21:09:45 [INFO] RPC client: Communicator ended with: 1
+[1;32m==> virtualbox-iso: Goss validate failed[0m
+[1;32m==> virtualbox-iso: Inspect mode on : proceeding without failing Packer[0m
+[1;32m==> virtualbox-iso: Running GOSS render command: cd /tmp/goss && set "GOSS_USE_ALPHA=1" && set "GOSS_MAX_CONCURRENT=1" &&  /tmp/goss-0.3.16-windows-amd64.exe --gossfile goss/goss.yaml --vars /tmp/goss/goss-vars.yaml --vars-inline {'OS':'windows','PROVIDER':'virtualbox','containerd_version':'1.6.20','distribution_version':'2019','docker_ee_version':'19.03.12','kubernetes_version':'v1.24.11','pause_image':'registry.k8s.io/pause:3.9','runtime':'containerd'} render > /tmp/goss-spec.yaml[0m
+2023/05/03 21:09:45 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: cd /tmp/goss && set "GOSS_USE_ALPHA=1" && set "GOSS_MAX_CONCURRENT=1" &&  /tmp/goss-0.3.16-windows-amd64.exe --gossfile goss/goss.yaml --vars /tmp/goss/goss-vars.yaml --vars-inline {'OS':'windows','PROVIDER':'virtualbox','containerd_version':'1.6.20','distribution_version':'2019','docker_ee_version':'19.03.12','kubernetes_version':'v1.24.11','pause_image':'registry.k8s.io/pause:3.9','runtime':'containerd'} render > /tmp/goss-spec.yaml
+2023/05/03 21:09:45 packer-builder-virtualbox-iso plugin: [INFO] command 'cd /tmp/goss && set "GOSS_USE_ALPHA=1" && set "GOSS_MAX_CONCURRENT=1" &&  /tmp/goss-0.3.16-windows-amd64.exe --gossfile goss/goss.yaml --vars /tmp/goss/goss-vars.yaml --vars-inline {'OS':'windows','PROVIDER':'virtualbox','containerd_version':'1.6.20','distribution_version':'2019','docker_ee_version':'19.03.12','kubernetes_version':'v1.24.11','pause_image':'registry.k8s.io/pause:3.9','runtime':'containerd'} render > /tmp/goss-spec.yaml' exited with code: 1
+2023/05/03 21:09:45 packer-builder-virtualbox-iso plugin: [INFO] RPC endpoint: Communicator ended with: 1
+2023/05/03 21:09:45 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:09:45 [INFO] 161 bytes written for 'stderr'
+2023/05/03 21:09:45 [INFO] RPC client: Communicator ended with: 1
+2023/05/03 21:09:45 [INFO] RPC endpoint: Communicator ended with: 1
+2023/05/03 21:09:45 packer-provisioner-goss plugin: 2023/05/03 21:09:45 [INFO] 0 bytes written for 'stdout'
+2023/05/03 21:09:45 packer-provisioner-goss plugin: 2023/05/03 21:09:45 [INFO] 161 bytes written for 'stderr'
+[1;31m==> virtualbox-iso: could not read json data in goss\goss-command.yaml: template: test:241:14: executing "test" at <.Vars.ssh_source_url>: map has no entry for key "ssh_source_url"[0m
+2023/05/03 21:09:45 packer-provisioner-goss plugin: 2023/05/03 21:09:45 [INFO] RPC client: Communicator ended with: 1
+[1;32m==> virtualbox-iso: Goss render failed[0m
+[1;32m==> virtualbox-iso: Inspect mode on : proceeding without failing Packer[0m
+==> virtualbox-iso: 
+==> virtualbox-iso: 
+==> virtualbox-iso: Downloading spec file and debug info[0m
+[1;32m==> virtualbox-iso: 
+==> virtualbox-iso: 
+==> virtualbox-iso: 
+==> virtualbox-iso: Downloading spec file and debug info[0m
+[0;32m    virtualbox-iso: Downloading Goss specs from, /tmp/goss-spec.yaml and /tmp/debug-goss-spec.yaml to current dir[0m
+2023/05/03 21:09:47 [INFO] 0 bytes written for 'downloadWriter'
+2023/05/03 21:09:47 packer-provisioner-goss plugin: 2023/05/03 21:09:47 [INFO] 0 bytes written for 'downloadWriter'
+2023/05/03 21:09:48 [INFO] 174 bytes written for 'downloadWriter'
+2023/05/03 21:09:48 packer-provisioner-goss plugin: 2023/05/03 21:09:48 [INFO] 174 bytes written for 'downloadWriter'
+2023/05/03 21:09:48 [INFO] (telemetry) ending goss
+[1;32m==> virtualbox-iso: Gracefully halting virtual machine...[0m
+2023/05/03 21:09:48 packer-builder-virtualbox-iso plugin: Executing shutdown command: powershell A:/sysprep.ps1
+2023/05/03 21:09:50 packer-builder-virtualbox-iso plugin: [INFO] starting remote command: powershell A:/sysprep.ps1
+[0;32m    virtualbox-iso: >>> Sysprepping VM ...[0m
+[0;32m    virtualbox-iso: Using cloudbase-init unattend file for sysprep: C:\Program Files\Cloudbase Solutions\Cloudbase-Init\conf\Unattend.xml[0m
+2023/05/03 21:10:11 packer-builder-virtualbox-iso plugin: [INFO] command 'powershell A:/sysprep.ps1' exited with code: 0
+2023/05/03 21:10:11 packer-builder-virtualbox-iso plugin: Waiting max 1h0m0s for shutdown to complete
+2023/05/03 21:10:26 packer-builder-virtualbox-iso plugin: Delay for 2s after shutdown to allow locks to clear...
+2023/05/03 21:10:28 packer-builder-virtualbox-iso plugin: VM shut down.
+[0;32m    virtualbox-iso: Removing floppy drive...[0m
+2023/05/03 21:10:28 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"storageattach", "windows-2019-kube-v1.24.11", "--storagectl", "Floppy Controller", "--port", "0", "--device", "0", "--medium", "none"}
+2023/05/03 21:10:28 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 21:10:28 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "storageattach" "windows-2019-kube-v1.24.11" "--storagectl" "Floppy Controller" "--port" "0" "--device" "0" "--medium" "none"
+2023/05/03 21:10:28 packer-builder-virtualbox-iso plugin: Trying for 10 minutes to remove floppy controller.
+2023/05/03 21:10:28 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"storagectl", "windows-2019-kube-v1.24.11", "--name", "Floppy Controller", "--remove"}
+2023/05/03 21:10:28 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 21:10:28 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "storagectl" "windows-2019-kube-v1.24.11" "--name" "Floppy Controller" "--remove"
+2023/05/03 21:10:28 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"storageattach", "windows-2019-kube-v1.24.11", "--storagectl", "IDE Controller", "--port", "0", "--device", "1", "--type", "dvddrive", "--medium", "none"}
+2023/05/03 21:10:29 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 21:10:29 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "storageattach" "windows-2019-kube-v1.24.11" "--storagectl" "IDE Controller" "--port" "0" "--device" "1" "--type" "dvddrive" "--medium" "none"
+[1;32m==> virtualbox-iso: Preparing to export machine...[0m
+[0;32m    virtualbox-iso: Deleting forwarded port mapping for the communicator (SSH, WinRM, etc) (host port 4443)[0m
+2023/05/03 21:10:29 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"modifyvm", "windows-2019-kube-v1.24.11", "--natpf1", "delete", "packercomm"}
+2023/05/03 21:10:29 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 21:10:29 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "modifyvm" "windows-2019-kube-v1.24.11" "--natpf1" "delete" "packercomm"
+[1;32m==> virtualbox-iso: Exporting virtual machine...[0m
+[0;32m    virtualbox-iso: Executing: export windows-2019-kube-v1.24.11 --output output/windows-2019-kube-v1.24.11/windows-2019-kube-v1.24.11.ovf[0m
+2023/05/03 21:10:29 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"export", "windows-2019-kube-v1.24.11", "--output", "output/windows-2019-kube-v1.24.11/windows-2019-kube-v1.24.11.ovf"}
+2023/05/03 21:17:19 packer-builder-virtualbox-iso plugin: stdout: Successfully exported 1 machine(s).
+2023/05/03 21:17:19 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "export" "windows-2019-kube-v1.24.11" "--output" "output/windows-2019-kube-v1.24.11/windows-2019-kube-v1.24.11.ovf"
+2023/05/03 21:17:19 packer-builder-virtualbox-iso plugin: 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+[1;32m==> virtualbox-iso: Provisioning step had errors: Running the cleanup provisioner, if present...[0m
+2023/05/03 21:17:19 packer-builder-virtualbox-iso plugin: failed to unlock port lockfile: close tcp 127.0.0.1:4443: use of closed network connection
+[1;32m==> virtualbox-iso: Cleaning up floppy disk...[0m
+2023/05/03 21:17:19 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"storageattach", "windows-2019-kube-v1.24.11", "--storagectl", "Floppy Controller", "--port", "0", "--device", "0", "--medium", "none"}
+2023/05/03 21:17:19 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 21:17:19 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "storageattach" "windows-2019-kube-v1.24.11" "--storagectl" "Floppy Controller" "--port" "0" "--device" "0" "--medium" "none"
+2023/05/03 21:17:19 packer-builder-virtualbox-iso plugin: VBoxManage.exe: error: Could not find a controller named 'Floppy Controller'
+==> virtualbox-iso: VBoxManage.exe: error: Could not find a controller named 'Floppy Controller'. Not considering this a critical failure; build will continue.[0m
+[1;31m==> virtualbox-iso: Error unregistering floppy: VBoxManage error: [VBoxManage_WSL.sh] args= "storageattach" "windows-2019-kube-v1.24.11" "--storagectl" "Floppy Controller" "--port" "0" "--device" "0" "--medium" "none"
+==> virtualbox-iso: VBoxManage.exe: error: Could not find a controller named 'Floppy Controller'. Not considering this a critical failure; build will continue.[0m
+2023/05/03 21:17:19 packer-builder-virtualbox-iso plugin: failed to unlock port lockfile: close tcp 127.0.0.1:5942: use of closed network connection
+[1;32m==> virtualbox-iso: Deregistering and deleting VM...[0m
+2023/05/03 21:17:19 packer-builder-virtualbox-iso plugin: Executing VBoxManage: []string{"unregistervm", "windows-2019-kube-v1.24.11", "--delete"}
+2023/05/03 21:17:21 packer-builder-virtualbox-iso plugin: stdout:
+2023/05/03 21:17:21 packer-builder-virtualbox-iso plugin: stderr: [VBoxManage_WSL.sh] args= "unregistervm" "windows-2019-kube-v1.24.11" "--delete"
+2023/05/03 21:17:21 packer-builder-virtualbox-iso plugin: 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+2023/05/03 21:17:21 packer-builder-virtualbox-iso plugin: Deleting floppy disk: /tmp/packer3313478041
+2023/05/03 21:17:21 [INFO] (telemetry) ending virtualbox-iso
+==> Wait completed after 1 hour 49 minutes
+2023/05/03 21:17:21 machine readable: error-count []string{"1"}
+==> Some builds didn't complete successfully and had errors:
+2023/05/03 21:17:21 machine readable: virtualbox-iso,error []string{"Error executing Ansible: Non-zero exit status: exit status 1"}
+==> Builds finished but no artifacts were created.
+[1;31mBuild 'virtualbox-iso' errored after 1 hour 49 minutes: Error executing Ansible: Non-zero exit status: exit status 1[0m
+
+==> Wait completed after 1 hour 49 minutes
+
+==> Some builds didn't complete successfully and had errors:
+2023/05/03 21:17:21 [INFO] (telemetry) Finalizing.
+--> virtualbox-iso: Error executing Ansible: Non-zero exit status: exit status 1
+
+==> Builds finished but no artifacts were created.
+2023/05/03 21:17:21 waiting for all plugin processes to complete...
+2023/05/03 21:17:21 /home/mloskot/.packer.d/plugins/packer-provisioner-goss: plugin process exited
+2023/05/03 21:17:21 /usr/bin/packer: plugin process exited
+2023/05/03 21:17:21 [ERR] Error decoding response stream 19: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 37: EOF
+2023/05/03 21:17:21 /usr/bin/packer: plugin process exited
+2023/05/03 21:17:21 /usr/bin/packer: plugin process exited
+2023/05/03 21:17:21 [ERR] Error decoding response stream 70: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 25: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 61: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 88: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 34: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 43: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 64: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 49: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 46: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 58: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 67: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 28: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 73: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 76: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 55: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 16: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 22: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 79: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 40: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 82: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 91: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 10: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 94: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 52: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 13: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 85: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 97: EOF
+2023/05/03 21:17:21 [ERR] Error decoding response stream 31: EOF
+2023/05/03 21:17:21 /usr/bin/packer: plugin process exited
+make: *** [Makefile:526: build-vbox-windows-2019] Error 1
