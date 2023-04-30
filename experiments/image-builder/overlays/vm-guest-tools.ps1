@@ -68,7 +68,7 @@ if (!( Test-Path "C:\Windows\Temp\7z1900-x64.msi")) {
       }
       Catch {
         Write-Output "Unable to determine the latest version of VBox tools. Falling back to hardcoded URL."
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://download.virtualbox.org/virtualbox/6.1.8/VBoxGuestAdditions_6.1.8.iso', 'C:\Windows\Temp\VBoxGuestAdditions.iso')
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://download.virtualbox.org/virtualbox/7.0.8/VBoxGuestAdditions_7.0.8.iso', 'C:\Windows\Temp\VBoxGuestAdditions.iso')
       }
     }
   
