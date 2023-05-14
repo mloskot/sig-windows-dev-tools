@@ -1,0 +1,14 @@
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: 10.20.30.10
+nodeRegistration:
+  kubeletExtraArgs:
+    node-ip: 10.20.30.10
+    cgroup-driver: cgroupfs
+---
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+kubernetesVersion: stable-1.27
+networking:
+  podSubnet: "100.244.0.0/16"

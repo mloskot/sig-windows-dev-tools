@@ -4,9 +4,9 @@ Param(
 )
 
 # Force Kubernetes folder
-mkdir -Force C:/k/
+New-Item -Path C:\k -ItemType Directory -Force
 
 # Copy a clean StartKubelet.ps1 configuration for 1.24+
 If ([int]$kubernetesVersion.split(".",2)[1] -gt 23) {
-    cp C:/forked/StartKubelet.ps1 c:\k\StartKubelet.ps1
+    Copy-Item -Path C:\forked\StartKubelet.ps1 -Destination C:\k\StartKubelet.ps1 -Force
 }
