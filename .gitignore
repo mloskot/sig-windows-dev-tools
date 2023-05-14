@@ -2,6 +2,7 @@ sync/config
 sync/windows/download/
 sync/linux/download/
 sync/shared/config
+sync/shared/kubeconfig
 sync/shared/kubejoin.ps1
 sync/shared/kubeadm.yaml
 sync/shared/settings.yaml
