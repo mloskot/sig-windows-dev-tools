@@ -16,11 +16,72 @@ import (
 	"github.com/magefile/mage/sh"
 )
 
-// Create and run Kubernetes cluster with Linux (control plane) and Windows (worker) nodes.
-func Run() error {
-	mg.SerialDeps(startup, checkClusterNotExist, Config.Settings, Config.Vagrant, preRun, runLinuxControlPlaneNode, runWindowsWorkerNode, postRun, Status)
+// Exported targets namespace
+type Cluster mg.Namespace
+
+// Create Kubernetes cluster with Linux (control plane) and Windows (worker) nodes.
+func (Cluster) Create() error {
+	mg.SerialDeps(startup, checkClusterNotExist, Config.Settings, Config.Vagrant, preRun, runLinuxControlPlaneNode, runWindowsWorkerNode, postRun)
 
 	logTargetRunTime("Run")
+	return nil
+}
+
+// Destroy Vagrant machines with Kubernetes cluster nodes.
+func (Cluster) Destroy() error {
+	mg.SerialDeps(startup, Config.Settings, Config.Vagrant)
+
+	// ignore errors and continue
+	sh.Run("vagrant", "destroy", "--force")
+
+	var volatilePaths = [...]string{
+		filepath.Join("sync", "shared", "config"),
+		filepath.Join("sync", "shared", "kubeadm.yaml"),
+		filepath.Join("sync", "shared", "kubejoin.ps1"),
+		filepath.Join("sync", "shared", "settings.yaml"),
+		filepath.Join(".lock"),
+	}
+
+	for _, path := range volatilePaths {
+		_, err := os.Stat(filepath.Clean(path))
+		if !os.IsNotExist(err) {
+			log.Println("Cleaning", path)
+			err := os.RemoveAll(path)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	logTargetRunTime("Run")
+	return nil
+}
+
+// Check state of Vagrant machines and Kubernetes nodes.
+func (Cluster) Status() error {
+	mg.SerialDeps(startup, Config.Vagrant)
+
+	var err error
+
+	log.Println("vagrant status")
+	err = sh.Run("vagrant", "status")
+	if err != nil {
+		return err
+	}
+
+	log.Println("kubectl get nodes")
+	err = sh.Run("vagrant", "ssh", "controlplane", "-c", "kubectl get nodes")
+	if err != nil {
+		return err
+	}
+
+	log.Println("kubectl get pods")
+	err = sh.Run("vagrant", "ssh", "controlplane", "-c", "kubectl get --all-namespaces pods --output=wide")
+	if err != nil {
+		return err
+	}
+
+	logTargetRunTime("Status")
 	return nil
 }
 
