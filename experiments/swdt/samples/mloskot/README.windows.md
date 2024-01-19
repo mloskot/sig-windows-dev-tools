@@ -5,6 +5,16 @@ want to try and test the SWDT CLI on Windows host targeting Windows VM
 using PowerShell in order to set it up and join as Kubernetes cluster node,
 that is, as SWDT CLI is being completed with new features.
 
+## Steps
+
+1. [Prerequisites](#prerequisites)
+2. [Prepare Windows host](#prepare-windows-host)
+3. [Generate SSH key](#generate-ssh-key)
+4. [Create Hyper-V NAT network](#create-hyper-v-nat-network)
+5. [Create Windows VM](#create-windows-vm)
+6. [Configure Windows VM](#configure-windows-vm)
+7. [Set up Windows node](#set-up-windows-node)
+
 > *IMPORTANT*:
 > Run the presented PowerShell commands one by one in order as their are presented.
 > If any command fails for you, please, report it.
@@ -15,7 +25,9 @@ that is, as SWDT CLI is being completed with new features.
 - PowerShell 7 > Run as Administrator
 - Downloaded [Windows Server 2022 VHD](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022)
 
-## 1. Preparation
+[back](#steps)
+
+## Prepare Windows host
 
 Check PowerShell on Windows host runs as Administrator:
 
@@ -29,7 +41,9 @@ Enable Hyper-V on Windows host:
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 ```
 
-## 2. Generate SSH key
+[back](#steps)
+
+## Generate SSH key
 
 Generate SSH key to be deployed to Windows VM for convenient password-less SSH communication:
 
@@ -52,7 +66,9 @@ Remove-Variable -Name sshKey
 > *IMPORTANT:* The location of the SSH private key, relative to the project repository root folder,
 is already present in the [winworker.yaml](winworker.yaml) configuration file.
 
-## 3. Create Hyper-V NAT network
+[back](#steps)
+
+## Create Hyper-V NAT network
 
 Run the following PowerShell commands on Windows host as Administrator.
 
@@ -77,7 +93,9 @@ Add-Content -Path "$($Env:WinDir)\system32\Drivers\etc\hosts" -Value '192.168.10
 Add-Content -Path "$($Env:WinDir)\system32\Drivers\etc\hosts" -Value '192.168.10.3 winworker.cluster winworker   # Kubernetes Windows node'
 ```
 
-## 4. Create Windows VM
+[back](#steps)
+
+## Create Windows VM
 
 The VHD requires VM generation 1, does not boot for VM generation 2.
 Using the official Windows Server VHD to avoid walk through the manual
@@ -119,7 +137,9 @@ The VM should start and Windows boot displaying `Hi there` screen where the init
     $vmAdminPassword = "K8s@windows";
     ```
 
-## 5. Configure Windows VM
+[back](#steps)
+
+## Configure Windows VM
 
 The following PowerShell Direct commands are executed directly on the Windows VM.
 
@@ -202,7 +222,9 @@ Test SSH authentication using the private key - no password prompt is expected:
 ssh -i '.\experiments\swdt\samples\mloskot\ssh.id_rsa' Administrator@winworker
 ```
 
-## 6. Set up Windows node
+[back](#steps)
+
+## Set up Windows node
 
 ```powershell
 .\swdt.ps1 setup --config .\experiments\swdt\samples\mloskot\winworker.yaml
@@ -218,3 +240,5 @@ ssh -i '.\experiments\swdt\samples\mloskot\ssh.id_rsa' Administrator@winworker "
 ```
 
 *TODO(mloskot):* Keep this guide up to date as new SWDT CLI features are implemented
+
+[back](#steps)
