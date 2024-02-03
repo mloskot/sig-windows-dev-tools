@@ -12,15 +12,16 @@ that is, as SWDT CLI is being completed with new features.
 ## Prerequisites
 
 - Windows host
-- PowerShell 7 > Run as Administrator
 - Downloaded [Windows Server 2022 VHD](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022)
+- PowerShell 7 > Run as Administrator
+- `winget install minikube` as Administrator
 
 ## 1. Preparation
 
 Check PowerShell on Windows host runs as Administrator:
 
 ```powershell
-(New-Object Security.Principal.WindowsPrincipal $([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+(New-Object Security.Principal.WindowsPrincipal $([Security.Principal.WindowsIdentit#Requires -RunAsAdministratory]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 ```
 
 Enable Hyper-V on Windows host:
@@ -202,19 +203,17 @@ Test SSH authentication using the private key - no password prompt is expected:
 ssh -i '.\experiments\swdt\samples\mloskot\ssh.id_rsa' Administrator@winworker
 ```
 
-## 6. Set up Windows node
+## 6. Create Kubernetes cluster
 
 ```powershell
-.\swdt.ps1 setup --config .\experiments\swdt\samples\mloskot\winworker.yaml
+minikube config set driver hyperv
 ```
-
-Assuming successful completion of the command above the Windows node
-should now be provision with Chocolatey and some general purpose utilities.
-
-Try it:
 
 ```powershell
-ssh -i '.\experiments\swdt\samples\mloskot\ssh.id_rsa' Administrator@winworker "C:\ProgramData\chocolatey\bin\choco.exe --version"
+minikube start `
+  --driver=hyperv `
+  --hyperv-virtual-switch='ClusterNatSwitch' `
+  --nodes=1 `
+  --container-runtime=containerd `
+  --cni=flannel
 ```
-
-*TODO(mloskot):* Keep this guide up to date as new SWDT CLI features are implemented
